@@ -1,0 +1,188 @@
+<div class="container">
+    <h4>About Component</h4>
+
+    <!--    <ul class="list-group list-group-flush">-->
+    <!--        <li class="list-group-item"-->
+    <!--            *ngFor="let contact of contacts"-->
+    <!--            (click)="selectedEmployee(contact)">-->
+    <!--            {{contact.name}}-->
+
+    <!--        </li>-->
+    <!--    </ul>-->
+
+    <div class="row">
+        <div class="col-md-7" [hidden]="!response.message">
+            <div class="alert alert-{{response.statusCode === 200 ? 'success': 'danger'}}" >{{response.message}}</div>
+        </div>
+        <div class="col-md-7">
+            <div class="card border-primary">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">Contact List</h5>
+                        <button class="btn btn-sm btn-outline-success" (click)="createContact('store')">Add</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-stripped">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let data of contacts ">
+                                <td>{{data.name}}</td>
+                                <td>{{data.lastname}}</td>
+                                <td>{{data.email}}</td>
+
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-outline-info m-1"
+                                                (click)="showContact('show',data.id)">Show
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary m-1" (click)="editContact('update',data.id)" >Edit</button>
+                                        <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteContact('delete',data.id)" >Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-5" *ngIf="status === 'show'">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        Info Contact
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Name: <h5>{{contact.name}}</h5>
+                            Lastname: <h5>{{contact.lastname}}</h5>
+                            Email: <h5>{{contact.email}}</h5>
+                        </div>
+                        <div class="col-md-6">
+                            Phone: <h5>{{contact.phone}}</h5>
+                            Gender: <h5>{{contact.gender}}</h5>
+                            Date: <h5>{{contact.date}}</h5>
+                        </div>
+                    </div>
+
+                    <div class="btn-group-sm mt-2">
+                        <button class="btn btn-sm btn-outline-primary mr-1" (click)="editContact('update',contact.id)">Edit</button>
+                        <button class="btn btn-sm btn-outline-danger mr-1" (click)="deleteContact('delete',contact.id)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5" *ngIf="status==='store' || status === 'update'">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title">
+                        {{status === 'store' ? 'Store' : (status === 'update' ? 'Update': '') }} Contact Form
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="formContact" (ngSubmit)="storeOrUpdateContact()">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name"
+                                       name="name" placeholder="Name"
+                                       formControlName="name">
+
+                                <div *ngIf="formContact.controls['name'].touched && !formContact.controls['name'].valid">
+                                    <span class="text-danger" *ngIf="formContact.controls['name'].errors['required']">El campo es requerido.</span>
+                                    <span class="text-danger" *ngIf="formContact.controls['name'].errors['pattern']">El campo debe tener solo letras..</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastname">Lastname</label>
+                                <input type="text" class="form-control" id="lastname"
+                                       name="lastname" placeholder="Lastname"
+                                       formControlName="lastname">
+                                <div *ngIf="formContact.controls['lastname'].touched && !formContact.controls['lastname'].valid">
+                                    <span class="text-danger" *ngIf="formContact.controls['lastname'].errors['required']">El campo es requerido.</span>
+                                    <span class="text-danger" *ngIf="formContact.controls['lastname'].errors['pattern']">El campo debe tener solo letras..</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" id="email"
+                                       name="email" placeholder="Email"
+                                       formControlName="email">
+                                <div *ngIf="formContact.controls['email'].touched && !formContact.controls['email'].valid">
+                                    <span class="text-danger" *ngIf="formContact.controls['email'].errors['required']">El campo es requerido.</span>
+<!--                                    <span class="text-danger" *ngIf="formContact.controls['email'].errors['pattern']">El campo debe tener solo letras..</span>-->
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="phone">Phone</label>
+                                <input type="text" class="form-control" id="phone"
+                                       name="phone" placeholder="Phone"
+                                       formControlName="phone">
+                                <div *ngIf="formContact.controls['phone'].touched && !formContact.controls['phone'].valid">
+                                    <span class="text-danger" *ngIf="formContact.controls['phone'].errors['required']">El campo es requerido.</span>
+                                    <!--                                    <span class="text-danger" *ngIf="formContact.controls['email'].errors['pattern']">El campo debe tener solo letras..</span>-->
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="gender">Gender</label>
+                                <select name="gender" id="gender" class="form-control" formControlName="gender">
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                </select>
+                                <div *ngIf="formContact.controls['gender'].touched && !formContact.controls['gender'].valid">
+                                    <span class="text-danger" *ngIf="formContact.controls['gender'].errors['required']">El campo es requerido.</span>
+                                    <!--                                    <span class="text-danger" *ngIf="formContact.controls['email'].errors['pattern']">El campo debe tener solo letras..</span>-->
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" id="date"
+                                       name="date" placeholder="Date"
+                                       formControlName="date">
+                                <div *ngIf="formContact.controls['date'].touched && !formContact.controls['date'].valid">
+                                    <span class="text-danger" *ngIf="formContact.controls['date'].errors['required']">El campo es requerido.</span>
+                                    <!--                                    <span class="text-danger" *ngIf="formContact.controls['email'].errors['pattern']">El campo debe tener solo letras..</span>-->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control" id="image"
+                                       name="image" placeholder="Image"
+                                       accept="image/png, image/jpeg"
+                                       formControlName="image"
+                                       (change)="fileChange($event)">
+                                <div *ngIf="formContact.controls['image'].touched && !formContact.controls['image'].valid">
+                                    <span class="text-danger" *ngIf="formContact.controls['image'].errors['required']">El campo es requerido.</span>
+                                    <!--                                    <span class="text-danger" *ngIf="formContact.controls['email'].errors['pattern']">El campo debe tener solo letras..</span>-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn-group-sm mt-2">
+                            <button type="submit" class="btn btn-sm btn-outline-info m-1" [disabled]="!formContact.valid" >{{status === 'store' ? 'Save' : (status === 'update' ? 'Update': '') }}</button>
+                            <button type="button" class="btn btn-sm btn-outline-danger m-1" (click)="cancel()" *ngIf="status === 'store'">Cancel</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

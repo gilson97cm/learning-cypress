@@ -1,0 +1,12 @@
+{
+  "experimentalStudio": true,
+  "baseUrl": "http://localhost:3000/",
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "charts": true,
+    "overwrite": false,
+    "html": false,
+    "json": true,
+    "reportDir": "cypress/report"
+  }
+}

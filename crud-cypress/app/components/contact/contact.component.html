@@ -1,0 +1,45 @@
+<div class="container">
+    <h4>Contact Component</h4>
+
+    <div class="card">
+        <div class="card-body">
+            <form (ngSubmit)="sendContact(formContact)" #formContact="ngForm">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" placeholder="Name"
+                               id="name" name="name"
+                               #name ="ngModel"
+                               ngModel required>
+                        <div *ngIf="!name.valid && name.dirty">
+                        <span class="text-danger">
+                            Invalid Name.
+                        </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" placeholder="Email"
+                               id="email" name="email"
+                               ngModel required
+                               #email="ngModel"
+                               pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+
+                        <div *ngIf="!email.valid && email.dirty">
+                        <span class="text-danger">
+                            Invalid Email.
+                        </span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-sm btn-outline-success"
+                        [disabled]="!formContact.valid">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

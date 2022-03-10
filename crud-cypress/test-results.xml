@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.0000" tests="1" failures="1">
+  <testsuite name="Root Suite" timestamp="2022-03-10T17:21:07" tests="1" file="cypress/integration/module-api-tests.js" time="0.0000" failures="1">
+    <testcase name="An uncaught error was detected outside of a test" time="0.0000" classname="An uncaught error was detected outside of a test">
+      <failure message="The following error originated from your test code, not from Cypress.
+
+  &gt; process is not defined
+
+When Cypress detects uncaught errors originating from your test code it will automatically fail the current test.
+
+Cypress could not associate this error to any specific test.
+
+We dynamically generated a new test to display this failure." type="ReferenceError"><![CDATA[ReferenceError: The following error originated from your test code, not from Cypress.
+
+  > process is not defined
+
+When Cypress detects uncaught errors originating from your test code it will automatically fail the current test.
+
+Cypress could not associate this error to any specific test.
+
+We dynamically generated a new test to display this failure.
+    at Object../node_modules/ci-info/index.js (http://192.168.0.113/__cypress/tests?p=cypress\integration\module-api-tests.js:60234:13)
+    at __webpack_require__ (http://192.168.0.113/__cypress/tests?p=cypress\integration\module-api-tests.js:20:30)
+    at Object../node_modules/is-ci/index.js (http://192.168.0.113/__cypress/tests?p=cypress\integration\module-api-tests.js:105601:18)
+    at __webpack_require__ (http://192.168.0.113/__cypress/tests?p=cypress\integration\module-api-tests.js:20:30)
+    at Object.eval (http://192.168.0.113/__cypress/tests?p=cypress\integration\module-api-tests.js:69511:14)
+    at Object../node_modules/cypress/lib/util.js (http://192.168.0.113/__cypress/tests?p=cypress\integration\module-api-tests.js:69997:30)
+    at __webpack_require__ (http://192.168.0.113/__cypress/tests?p=cypress\integration\module-api-tests.js:20:30)
+    at Object.eval (http://192.168.0.113/__cypress/tests?p=cypress\integration\module-api-tests.js:65437:14)
+    at Object../node_modules/cypress/index.js (http://192.168.0.113/__cypress/tests?p=cypress\integration\module-api-tests.js:65466:30)
+    at __webpack_require__ (http://192.168.0.113/__cypress/tests?p=cypress\integration\module-api-tests.js:20:30)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

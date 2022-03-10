@@ -1,0 +1,238 @@
+<div class="container ">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <h4 class="text-muted">
+        {{
+        status == '' ? 'List of Contacts' :
+        (status == 'show' ? 'Information':
+        (status == 'save' ? 'Add Contact':
+        (status == 'edit' ? 'Edit Contact': '')))
+        }}
+      </h4>
+
+      <!-- <input type="text" class="form-control w-50" *ngIf="status == ''" 
+        placeholder="Type to Search" 
+        (input)="onSearch($event.target.value)"> -->
+
+      <button id="btnAdd" class="btn btn-sm btn-success" *ngIf="status == ''" (click)="showContact('save')">
+        <i class="fa fa-plus" aria-hidden="true"></i> Add
+      </button>
+      <button class="btn btn-sm btn-info" *ngIf="status == 'show'" (click)="showContact('')">
+        <i class="fa fa-list" aria-hidden="true"></i> List
+      </button>
+
+    </div>
+    <div class="card-body">
+      <div class="col-md-7" [hidden]="!response.message">
+        <div class="alert alert-{{response.statusCode === 200 ? 'success': 'danger'}}">{{response.message}}</div>
+      </div>
+      <div *ngIf="status == ''">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+          <table class="table table-hover table-striped table-sm">
+            <thead>
+              <th>Name</th>
+              <th>Lastname</th>
+              <th>Email</th>
+              <th colspan="3">Action</th>
+            </thead>
+            <tbody class="contactList">
+              <tr *ngFor="let contact of contacts" [attr.id]="contact.id" class="trLsit">
+                <td>{{contact.name}}</td>
+                <td>{{contact.lastname}}</td>
+                <td class="email">{{contact.email}}</td>
+                <td>
+                  <button class="btn btn-sm btn-primary btnShow" (click)="showContact('show', contact.id)">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Show
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-warning btnEdit" (click)="editContact(contact.id)">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-danger btnDelete" (click)="deleteContact(contact.id)">
+                    <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul class="contactList">
+          <li *ngFor="let contact of contacts">{{contact.name}}</li>
+        </ul>
+
+     
+      </div>
+
+      <div *ngIf="status == 'show'">
+        <div class="row">
+          <div class="col-md-6">
+            <p> <strong>Name: </strong> {{contact.name}}</p>
+            <p><strong>Lastname: </strong>{{contact.lastname}}</p>
+            <p><strong>Email: </strong>{{contact.email}}</p>
+
+          </div>
+          <div class="col-md-6">
+            <p><strong>Phone: </strong>{{contact.phone}}</p>
+            <p><strong>Gender: </strong>{{contact.gender}}</p>
+            <p><strong>Date: </strong>{{contact.date}}</p>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="status === 'save' || status === 'edit'">
+        <form [formGroup]="_formContact" (submit)="addOrEditContact()">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Name</label>
+                <input class="form-control i-name" type="text" id="name" name="name" formControlName="name">
+                <div *ngIf="!_formContact.controls['name'].valid && _formContact.controls['name'].touched" class="mt-1">
+                  <span class="text-danger" *ngIf="_formContact.controls['name'].errors['required']">
+                    The field is required.
+                  </span>
+                  <span class="text-danger" *ngIf="_formContact.controls['name'].errors['pattern']">
+                    The field must be a minimum of 4 characters.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>LastName</label>
+                <input class="form-control" type="text" id="lastname" name="lastname" formControlName="lastname">
+                <div *ngIf="!_formContact.controls['lastname'].valid && _formContact.controls['lastname'].touched"
+                  class="mt-1">
+                  <span class="text-danger" *ngIf="_formContact.controls['lastname'].errors['required']">
+                    The field is required.
+                  </span>
+                  <span class="text-danger" *ngIf="_formContact.controls['lastname'].errors['pattern']">
+                    The field must be a minimum of 4 characters.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" id="email" type="text" name="email" formControlName="email">
+                <div *ngIf="!_formContact.controls['email'].valid && _formContact.controls['email'].touched"
+                  class="mt-1">
+                  <span class="text-danger" *ngIf="_formContact.controls['email'].errors['required']">
+                    The field is required.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone"
+                  formControlName="phone">
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender" class="form-control" formControlName="gender">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" 
+                id="date" name="date" placeholder="Date" 
+                formControlName="date">
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="file">File</label>
+                <input type="file" class="form-control-file" 
+                id="file" name="file">
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="range">Range</label>
+                <input type="range" class="form-control-range" 
+                id="range" name="range">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-froup">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radios" 
+                id="radio1" value="option1" formControlName="radios" > 
+                <label class="form-check-label" for="radio1">Radio 1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radios" 
+                id="radio2" value="option2" formControlName="radios" > 
+                <label class="form-check-label" for="radio2">Radio 2</label>
+              </div>
+            
+
+              <div *ngIf="!_formContact.controls['radios'].valid && _formContact.controls['radios'].touched"
+              class="mt-1">
+              <span class="text-danger" *ngIf="_formContact.controls['radios'].errors['required']">
+                The field is required.
+              </span>
+            </div>
+
+            </div>
+           
+
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="checkbox1" name="checkbox1" 
+                value="option1" formControlName="checkbox1">
+                <label class="form-check-label" for="checkbox1">Check 1</label>
+              </div>
+             
+              <div *ngIf="!_formContact.controls['checkbox1'].valid && _formContact.controls['checkbox1'].touched"
+              class="mt-1">
+              <span class="text-danger" *ngIf="_formContact.controls['checkbox1'].errors['required']">
+                The field is required.
+              </span>
+            </div>
+            </div>
+          </div>
+
+        
+          <div class="form-group">
+            <input type="button" class="btn btn-danger float-right ml-1" value="Cancelar" (click)="showContact('')" />
+
+            <button type="submit" id="btnSubmit"
+              class="float-right btn btn-{{status == 'save' ? 'primary' : (status == 'edit' ? 'warning': '')}}"
+              [disabled]="!_formContact.valid">
+              {{status == 'save' ? 'Add Contact' : (status == 'edit' ? 'Edit Contact': '')}}
+            </button>
+
+          </div>
+    
+
+      
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
