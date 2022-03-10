@@ -1,0 +1,37 @@
+- "backend_contacts" esta creado en laravel, se utiliza para poder interactuar con una base de datos y hacer test de peticiones HTTP
+- "crud_cypress" esta creado en angular
+
+*****INSTALACIÓN BACKEND****
+- Descargar Laragon.exe (https://github.com/leokhoa/laragon/releases/download/5.0.0/laragon-wamp.exe)
+- instalar Laragon
+- mover la carpeta "backend_contacts" a la ruta "c:/laragon/www"
+
+- (INICIAR MYSQL) en cualquier punto en blanco de Laragon dar click derecho, se abre un menu, colocar el cursor sobre MySQL y en el menu seleccionar "Start MySQL"
+
+- (INCIAR HEIDI SQL) en cualquier punto en blanco de Laragon dar click derecho, se abre un menu, colocar el cursor sobre MySQL y en el menu seleccionar "Heidi MySQL"
+- Dar clic en nuevo se creara una session llamada "Unamed"
+- Dar click en abrir
+- Dar click derecho sobre "Unamed", se abre un menu seleccionar "Crear Nuevo"
+- Ingresar el nombre de la nueva base de datos, en el combo box buscar y seleccionar "utf8_spanish_ci"
+
+-(CREAR LOS DATOS) en Laragon dar clic en el boton "terminal", (se bre una terminal)
+- ejecutar los comandos 
+	- cd backend_contacts
+	- cp .env .env.example
+	- php artisan key:generate
+	- code . (se abre visual studio con el proyecto "backend_contacts")
+
+-buscar el archivo ".env"
+- reemplazar el nombre de la base de datos en la linea 12 del archivo .env por el nombre de la base de datos creada anteriormente
+- guardar los cambios
+- volver a la ventana del terminal anterormente abierta
+-ejecutar los comandos
+	- php artisan migrate:fresh --seed
+	- php artisan serve --host AQUI_VA_SU_IP --port 80
+- si todo va bien ya tenemos el backend configurado!!
+
+*****INSTALACIÓN FRONTEND******
+- abrir el proyecto en Visual Studio Code
+- buscar el archivo "employee.service.ts" en la ruta "app/services"
+- en la linea 12 del archivo "employee.service.ts" cambiar la ip por SU IP
+- iniciar el proyecto con npm start
