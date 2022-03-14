@@ -11,7 +11,7 @@ import { EmployeeService } from '../../services/employee.service';
     styles:[` 
     .my-custom-scrollbar {
         position: relative;
-        height: 200px;
+        height: 500px;
         overflow: auto;
       }
       .table-wrapper-scroll-y {
@@ -130,8 +130,13 @@ export class HomeComponent implements OnInit {
                 Validators.required,
                 Validators.pattern("^.{4,}$")
             ]),
-            email: new FormControl('', [Validators.required]),
-            phone: new FormControl(''),
+            email: new FormControl('', [
+                Validators.required, 
+                Validators.pattern("[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?")
+            ]),
+            phone: new FormControl('',[
+                Validators.pattern("[0-9]{10}")
+            ]),
             gender: new FormControl(''),
             date: new FormControl(''),
             file: new FormControl(''),

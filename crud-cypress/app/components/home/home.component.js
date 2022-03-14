@@ -97,8 +97,13 @@ var HomeComponent = (function () {
                 forms_1.Validators.required,
                 forms_1.Validators.pattern("^.{4,}$")
             ]),
-            email: new forms_2.FormControl('', [forms_1.Validators.required]),
-            phone: new forms_2.FormControl(''),
+            email: new forms_2.FormControl('', [
+                forms_1.Validators.required,
+                forms_1.Validators.pattern("[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?")
+            ]),
+            phone: new forms_2.FormControl('', [
+                forms_1.Validators.pattern("[0-9]{10}")
+            ]),
             gender: new forms_2.FormControl(''),
             date: new forms_2.FormControl(''),
             file: new forms_2.FormControl(''),
@@ -111,7 +116,7 @@ var HomeComponent = (function () {
         core_1.Component({
             selector: 'app-home',
             templateUrl: 'app/components/home/home.component.html',
-            styles: [" \n    .my-custom-scrollbar {\n        position: relative;\n        height: 200px;\n        overflow: auto;\n      }\n      .table-wrapper-scroll-y {\n        display: block;\n      }"
+            styles: [" \n    .my-custom-scrollbar {\n        position: relative;\n        height: 500px;\n        overflow: auto;\n      }\n      .table-wrapper-scroll-y {\n        display: block;\n      }"
             ]
         }), 
         __metadata('design:paramtypes', [employee_service_1.EmployeeService])

@@ -78,19 +78,31 @@ class ContactsController extends Controller
     {
         $user = User::find($id);
 
+        
+
         if (isset($user)) {
             return response()->json([
                 'statusCode' => 200,
                 'code' => 'USER_FOUND',
                 'message' => 'user found',
-                'contact' => $user
+                'contact' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'lastname' => $user->lastname,
+                    'email' => $user->email
+                ]
             ], 200);
         }
         return response()->json([
             'statusCode' => 404,
             'code' => 'USER_NOT_FOUND',
             'message' => 'error finding user',
-            'contact' => $user,
+            'contact' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'lastname' => $user->lastname,
+                'email' => $user->email
+            ]
         ], 404);
     }
 

@@ -45,31 +45,32 @@
 
 <body class="container bg-dark">
   <my-app>Cargando...</my-app>
-  <button id="btnIncrement" onclick="increment()">increment</button>
+  <div class="container m-3">
+    <button id="addInput" type="button" class="btn btn-primary mt-2">Add Input</button>
+    <div id="div-body" class="mt-2"></div>
+    <br>
+    <button id="btnIncrement" type="button" class="btn btn-primary">Increment</button>
+    you clicked button <span id="number">0</span> times
 
-  you clicked button <span id="num">0</span> times
+  </div>
 </body>
 <script>
-  function increment() {
-    let count = 0
-    document.getElementById('num').innerHTML = count + 1;
-
-  }
 
   $('#btnIncrement').on('click', (e) => {
-    // do something synchronously randomly
+    let count = 0
+    $('#number').html(count + 1);
+  });
+
+  $('#addInput').on('click', (e) => {
     let random = Math.random();
 
-    if (random < 0.8) {
-
-      // append an input
+    if (random < 0.5) {
       // setTimeout(() => {
-        $("<input />").appendTo($('body'))
+      $("<input />").appendTo($('#div-body')).attr('id', 'newInput')
       // }, 3000);
     } else {
-      // or append a textarea
       // setTimeout(() => {
-        $('<textarea />').appendTo($('body'))
+      $('<textarea />').appendTo($('#div-body')).attr('id', 'newArea')
       // }, 3000);
     }
   })

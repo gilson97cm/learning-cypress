@@ -1,6 +1,6 @@
 import "cypress-file-upload";
 
-describe("My Test", () => {
+describe("Cypress Studio Test", () => {
   it("successfully loads", () => {
     cy.visit("/"); // change URL to match your dev URL
   });
