@@ -16,8 +16,9 @@
 
 -(CREAR LOS DATOS) en Laragon dar clic en el boton "terminal", (se bre una terminal)
 - ejecutar los comandos 
-	- cd backend_contacts
-	- cp .env .env.example
+	- cd backend_contacts (ruta del backend)
+	- composer install
+	- cp .env.example .env
 	- php artisan key:generate
 	- code . (se abre visual studio con el proyecto "backend_contacts")
 
@@ -34,4 +35,5 @@
 - abrir el proyecto en Visual Studio Code
 - buscar el archivo "employee.service.ts" en la ruta "app/services"
 - en la linea 12 del archivo "employee.service.ts" cambiar la ip por SU IP
+- enjecutar npm install
 - iniciar el proyecto con npm start
