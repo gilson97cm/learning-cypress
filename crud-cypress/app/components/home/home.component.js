@@ -23,6 +23,7 @@ var HomeComponent = (function () {
         this.status = '';
         this.currentId = '';
         this.search = '';
+        this.range = '5';
     }
     HomeComponent.prototype.ngOnInit = function () {
         this.listOfContacts();
@@ -118,7 +119,7 @@ var HomeComponent = (function () {
         core_1.Component({
             selector: 'app-home',
             templateUrl: 'app/components/home/home.component.html',
-            styles: [" \n    .my-custom-scrollbar {\n        position: relative;\n        height: 500px;\n        overflow: auto;\n      }\n      .table-wrapper-scroll-y {\n        display: block;\n      }"
+            styles: [" \n    .my-custom-scrollbar {\n        position: relative;\n        height: 400px;\n        overflow: auto;\n      }\n      .table-wrapper-scroll-y {\n        display: block;\n      }"
             ]
         }), 
         __metadata('design:paramtypes', [employee_service_1.EmployeeService])

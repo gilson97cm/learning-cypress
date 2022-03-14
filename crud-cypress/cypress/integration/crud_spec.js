@@ -6,62 +6,128 @@ describe("My First Test", () => {
   let url = `http://${ip}/api/contacts`;
   let updateContactId = 18;
   let deleteContactId = 35;
-  let options = 2;
-
+  let options = 0;
 
   it("Successfully Loads", () => {
     cy.visit("/");
   });
 
   if (options == 0) {
-    it("Test from type #1", () => {
+    // it("Test from type #1", () => {
+    //   cy.get("#btnAdd").click();
+
+    //   let array = [
+    //     "Name*",
+    //     "Lastname*",
+    //     "Email*",
+    //     "Phone",
+    //     "Gender",
+    //     "Date",
+    //     "File",
+    //     "Range",
+    //     "Radio 1",
+    //     "Radio 2",
+    //     "Check 1",
+    //   ];
+
+    //   let count = 0;
+    //   cy.get("#form")
+    //     .find("label")
+    //     .each((x) => {
+    //       expect(x[0].textContent).equal(array[count]);
+    //       count++;
+    //     });
+
+    //   cy.get("#form").find("input[type=text]").should("have.length", 4);
+    //   cy.get("#form").find("input[type=date]").should("have.length", 1);
+    //   cy.get("#form").find("select").should("have.length", 1);
+    //   cy.get("#form").find("input[type=radio]").should("have.length", 2);
+    //   cy.get("#form").find("input[type=checkbox]").should("have.length", 1);
+    //   cy.get("#form").find("input[type=file]").should("have.length", 1);
+    //   cy.get("#form").find("input[type=range]").should("have.length", 1);
+    //   cy.get("#form")
+    //     .find("button[type=submit]")
+    //     .should("have.length", 1)
+    //     .should("be.disabled")
+    //     .contains("Save");
+    //   cy.get("#form")
+    //     .find("button[type=button]")
+    //     .should("have.length", 1)
+    //     .contains("Cancel");
+
+    // });
+
+    it("Click", () => {
       cy.get("#btnAdd").click();
+    });
 
-      let array = [
-        "Name*",
-        "Lastname*",
-        "Email*",
-        "Phone",
-        "Gender",
-        "Date",
-        "File",
-        "Range",
-        "Radio 1",
-        "Radio 2",
-        "Check 1",
-      ];
+    it("Type", () => {
+      cy.get("#email")
+        .type("fake@email.com")
+        .should("have.value", "fake@email.com");
+    });
 
-      let count = 0;
-      cy.get("#form")
-        .find("label")
-        .each((x) => {
-          expect(x[0].textContent).equal(array[count]);
-          count++;
+    it("Focus", () => {
+      cy.get("#name").focus();
+    });
+
+    it("Blur", () => {
+      cy.get("#name").blur();
+    });
+
+    it("Clear", () => {
+      cy.get("#email").clear().should("have.value", "");
+    });
+
+    it("Check", () => {
+      cy.get(".nav-tabs li").eq(1).click();
+      cy.get('input[type="checkbox"]')
+        .not("[disabled]")
+        .check()
+        .should("be.checked");
+
+      cy.get('input[type="radio"]').check("option3");
+    });
+
+    it("Uncheck", () => {
+      cy.get('input[type="checkbox"]')
+        .not("[disabled]")
+        .uncheck()
+        .should("not.be.checked");
+    });
+    
+    it('Trigger', () => {
+      cy.get('#range')
+      .invoke('val', 25)
+      .trigger('change')
+      .get('input[type=range]').siblings('p')
+      .should('have.text', '25')
+    });
+
+    it("Select", () => {
+      cy.get(".nav-tabs li").first().click();
+      cy.get("#gender").select("Male");
+    });
+
+    it("Scroll", () => {
+      cy.get("#btnCancel").click();
+      // cy.get(".my-custom-scrollbar")
+
+      cy.get("table")
+        .invoke("height")
+        .then(x => {
+          if(x > 400){
+            cy.get(".my-custom-scrollbar").scrollTo("bottom");
+          }
         });
-
-      cy.get("#form").find("input[type=text]").should("have.length", 4);
-      cy.get("#form").find("input[type=date]").should("have.length", 1);
-      cy.get("#form").find("select").should("have.length", 1);
-      cy.get("#form").find("input[type=radio]").should("have.length", 2);
-      cy.get("#form").find("input[type=checkbox]").should("have.length", 1);
-      cy.get("#form").find("input[type=file]").should("have.length", 1);
-      cy.get("#form").find("input[type=range]").should("have.length", 1);
-      cy.get("#form")
-        .find("button[type=submit]")
-        .should("have.length", 1)
-        .should("be.disabled")
-        .contains("Save");
-      cy.get("#form")
-        .find("button[type=button]")
-        .should("have.length", 1)
-        .contains("Cancel");
     });
 
-    it("Chek inputs", () => {
-      cy.get("#name:valid").type("User").should("have.length", 0);
-    });
+    
 
-   
+    it("Screenshot", () => {
+      //cy.wait(2000);
+      // cy.get(".table").screenshot();
+    });
   }
 
   if (options == 1) {
@@ -162,16 +228,21 @@ describe("My First Test", () => {
       cy.get("#radio1").check();
       cy.get("#checkbox1").check();
 
-      cy.get("#btnSubmit").should("not.be.disabled").click().should(() => {
-        expect(localStorage.getItem("contactData")).to.eq(Json.stringify({
-          "name": "User",
-          "lastname": "Test",
-          "email": "user@email.com",
-          "phone": "0123456789",
-          "gender": "Male",
-          "date": "2007-01-01",
-        }));
-      });
+      cy.get("#btnSubmit")
+        .should("not.be.disabled")
+        .click()
+        .should(() => {
+          expect(localStorage.getItem("contactData")).to.eq(
+            Json.stringify({
+              name: "User",
+              lastname: "Test",
+              email: "user@email.com",
+              phone: "0123456789",
+              gender: "Male",
+              date: "2007-01-01",
+            })
+          );
+        });
     });
 
     it("Post with Form using submit()", function () {
@@ -240,7 +311,6 @@ describe("My First Test", () => {
       let rowSelector = `tr#${updateContactId}`;
       cy.get(rowSelector).find(".btnShow").click();
     });
-  
   }
 
   if (options == 3) {
@@ -301,5 +371,70 @@ describe("My First Test", () => {
           });
       });
     });
+  }
+
+  if (options == 4) {
+    const semver = require('semver')
+    if (semver.gte(Cypress.version, '1.1.3')) {
+      it('Cypress.version', () => {
+        cy.log(Cypress.version)
+        expect(Cypress.platform).to.be.a('string')
+      })
+    }
+  }
+
+  if (options == 5) {
+    it('Cypress spec', () => {
+      cy.log(Cypress.spec.name)
+      expect(Cypress.spec.name).to.be.eq('crud_spec.js')
+    })
+  }
+
+  if (options == 6) {
+    it('Cypress location', () => {
+      cy.location().should((loc) => {
+        expect(loc.href).to.include('localhost:3000')
+      })
+    })
+  }
+
+  if (options == 7) {
+    it('Navigation', () => {
+      cy.reload()
+      cy.wait(4000);
+      // reload the page without using the cache
+      cy.reload(true)
+    })
+  }
+
+  if (options == 8) {
+    it('Network Request', () => {
+      cy.intercept(
+        {
+          method: 'GET', // Route all GET requests
+          url: url, // that have a URL that matches '/users/*'
+        },
+        [] // and force the response to be: []
+      ).as('getContacts') // and assign an alias
+    })
+  }
+
+  if (options == 9) {
+    it('Wait Request', () => {
+      cy.intercept('/activities/*', { fixture: 'activities' }).as('getActivities')
+      cy.intercept('/messages/*', { fixture: 'messages' }).as('getMessages')
+
+      // visit the dashboard, which should make requests that match
+      // the two routes above
+      cy.visit('http://localhost:8888/dashboard')
+
+      // pass an array of Route Aliases that forces Cypress to wait
+      // until it sees a response for each request that matches
+      // each of these aliases
+      cy.wait(['@getActivities', '@getMessages'])
+
+      // these commands will not run until the wait command resolves above
+      cy.get('h1').should('contain', 'Dashboard')
+    })
   }
 });

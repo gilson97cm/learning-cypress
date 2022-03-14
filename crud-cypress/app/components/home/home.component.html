@@ -14,7 +14,7 @@
         placeholder="Type to Search" 
         (input)="onSearch($event.target.value)"> -->
 
-      <button id="btnDeleteMultiple" class="btn btn-sm btn-success" *ngIf="status == ''" (click)="showContact('')">
+      <button hidden id="btnDeleteMultiple" class="btn btn-sm btn-success" *ngIf="status == ''" (click)="showContact('')">
         <i class="fa fa-plus" aria-hidden="true"></i> Delete Selected
       </button>
       <button id="btnAdd" class="btn btn-sm btn-success" *ngIf="status == ''" (click)="showContact('save')">
@@ -88,145 +88,189 @@
         </div>
       </div>
       <div *ngIf="status === 'save' || status === 'edit'">
+
         <form [formGroup]="_formContact" (submit)="addOrEditContact()" id="form">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Name*</label>
-                <input class="form-control i-name" type="text" id="name" name="name" formControlName="name">
-                <div *ngIf="!_formContact.controls['name'].valid && _formContact.controls['name'].touched" class="mt-1">
-                  <span class="text-danger" *ngIf="_formContact.controls['name'].errors['required']">
-                    The field is required.
-                  </span>
-                  <span class="text-danger" *ngIf="_formContact.controls['name'].errors['pattern']">
-                    The field must be a minimum of 4 characters.
-                  </span>
+
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#tab1">Tab 1</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#tab2">Tab 2</a>
+            </li>
+
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content p-3">
+            <div class="tab-pane container active" id="tab1">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Name*</label>
+                    <input class="form-control i-name" type="text" id="name" name="name" formControlName="name">
+                    <div *ngIf="!_formContact.controls['name'].valid && _formContact.controls['name'].touched"
+                      class="mt-1">
+                      <span class="text-danger" *ngIf="_formContact.controls['name'].errors['required']">
+                        The field is required.
+                      </span>
+                      <span class="text-danger" *ngIf="_formContact.controls['name'].errors['pattern']">
+                        The field must be a minimum of 4 characters.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Lastname*</label>
+                    <input class="form-control" type="text" id="lastname" name="lastname"
+                      formControlName="lastname" >
+                    <div
+                      *ngIf="!_formContact.controls['lastname'].valid && _formContact.controls['lastname'].touched"
+                      class="mt-1">
+                      <span class="text-danger" *ngIf="_formContact.controls['lastname'].errors['required']">
+                        The field is required.
+                      </span>
+                      <span class="text-danger" *ngIf="_formContact.controls['lastname'].errors['pattern']">
+                        The field must be a minimum of 4 characters.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Email*</label>
+                    <input class="form-control" id="email" type="text" name="email" formControlName="email">
+                    <div *ngIf="!_formContact.controls['email'].valid && _formContact.controls['email'].touched"
+                      class="mt-1">
+                      <span class="text-danger" *ngIf="_formContact.controls['email'].errors['required']">
+                        The field is required.
+                      </span>
+                      <span class="text-danger" *ngIf="_formContact.controls['email'].errors['pattern']">
+                        The email is invalid.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone"
+                      formControlName="phone">
+
+                    <div *ngIf="!_formContact.controls['phone'].valid && _formContact.controls['phone'].touched"
+                      class="mt-1">
+                      <span class="text-danger" *ngIf="_formContact.controls['phone'].errors['pattern']">
+                        Incorrect format.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select name="gender" id="gender" class="form-control" formControlName="gender">
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Lastname*</label>
-                <input class="form-control" type="text" id="lastname" name="lastname" formControlName="lastname">
-                <div *ngIf="!_formContact.controls['lastname'].valid && _formContact.controls['lastname'].touched"
-                  class="mt-1">
-                  <span class="text-danger" *ngIf="_formContact.controls['lastname'].errors['required']">
-                    The field is required.
-                  </span>
-                  <span class="text-danger" *ngIf="_formContact.controls['lastname'].errors['pattern']">
-                    The field must be a minimum of 4 characters.
-                  </span>
+            <div class="tab-pane container fade" id="tab2">
+              <div class="row">
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" placeholder="Date"
+                      formControlName="date">
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Email*</label>
-                <input class="form-control" id="email" type="text" name="email" formControlName="email">
-                <div *ngIf="!_formContact.controls['email'].valid && _formContact.controls['email'].touched"
-                  class="mt-1">
-                  <span class="text-danger" *ngIf="_formContact.controls['email'].errors['required']">
-                    The field is required.
-                  </span>
-                  <span class="text-danger" *ngIf="_formContact.controls['email'].errors['pattern']">
-                    The email is invalid.
-                  </span>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="file">File</label>
+                    <input type="file" class="form-control-file" id="file" name="file">
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone"
-                  formControlName="phone">
 
-                <div *ngIf="!_formContact.controls['phone'].valid && _formContact.controls['phone'].touched"
-                  class="mt-1">
-                  <span class="text-danger" *ngIf="_formContact.controls['phone'].errors['pattern']">
-                    Incorrect format.
-                  </span>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="range">Range</label>
+                    <input type="range" class="form-control-range" 
+                    id="range" name="range" formControlName="range">
+                    <p>{{_formContact.controls['range'].value}}</p>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="gender">Gender</label>
-                <select name="gender" id="gender" class="form-control" formControlName="gender">
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
-              </div>
-            </div>
+                <div class="col-md-4">
+                  <div class="form-froup">
+                    <div class="form-check form-check">
+                      <input class="form-check-input" type="radio" name="radios" id="radio1" value="option1"
+                        formControlName="radios">
+                      <label class="form-check-label" for="radio1">Radio 1</label>
+                    </div>
+                    <div class="form-check form-check">
+                      <input class="form-check-input" type="radio" name="radios" id="radio2" value="option2"
+                        formControlName="radios" disabled>
+                      <label class="form-check-label" for="radio2">Radio 2</label>
+                    </div>
 
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="date">Date</label>
-                <input type="date" class="form-control" id="date" name="date" placeholder="Date" formControlName="date">
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="file">File</label>
-                <input type="file" class="form-control-file" id="file" name="file">
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="range">Range</label>
-                <input type="range" class="form-control-range" id="range" name="range">
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-froup">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="radios" id="radio1" value="option1"
-                  formControlName="radios">
-                <label class="form-check-label" for="radio1">Radio 1</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="radios" id="radio2" value="option2"
-                  formControlName="radios">
-                <label class="form-check-label" for="radio2">Radio 2</label>
-              </div>
+                    <div class="form-check form-check">
+                      <input class="form-check-input" type="radio" name="radios" id="radio3" value="option3"
+                        formControlName="radios">
+                      <label class="form-check-label" for="radio3">Radio 3</label>
+                    </div>
 
 
-              <div *ngIf="!_formContact.controls['radios'].valid && _formContact.controls['radios'].touched"
-                class="mt-1">
-                <span class="text-danger" *ngIf="_formContact.controls['radios'].errors['required']">
-                  The field is required.
-                </span>
-              </div>
+                    <div *ngIf="!_formContact.controls['radios'].valid && _formContact.controls['radios'].touched"
+                      class="mt-1">
+                      <span class="text-danger" *ngIf="_formContact.controls['radios'].errors['required']">
+                        The field is required.
+                      </span>
+                    </div>
 
-            </div>
+                  </div>
 
 
-          </div>
+                </div>
 
-          <div class="col-md-4">
-            <div class="form-group">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="checkbox1" name="checkbox1" value="option1"
-                  formControlName="checkbox1">
-                <label class="form-check-label" for="checkbox1">Check 1</label>
-              </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="form-check form-check">
+                      <input class="form-check-input" type="checkbox" id="checkbox1" name="checkbox1"
+                        value="option1" formControlName="checkbox1">
+                      <label class="form-check-label" for="checkbox1">Check 1</label>
+                    </div>
 
-              <div *ngIf="!_formContact.controls['checkbox1'].valid && _formContact.controls['checkbox1'].touched"
-                class="mt-1">
-                <span class="text-danger" *ngIf="_formContact.controls['checkbox1'].errors['required']">
-                  The field is required.
-                </span>
+                    <div class="form-check form-check">
+                      <input class="form-check-input" type="checkbox" id="checkbox2" name="checkbox2"
+                        value="option2" formControlName="checkbox1" disabled>
+                      <label class="form-check-label" for="checkbox2">Check 2</label>
+                    </div>
+
+
+                    <div
+                      *ngIf="!_formContact.controls['checkbox1'].valid && _formContact.controls['checkbox1'].touched"
+                      class="mt-1">
+                      <span class="text-danger" *ngIf="_formContact.controls['checkbox1'].errors['required']">
+                        The field is required.
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
 
           <div class="form-group">
-            <button type="button" class="btn btn-danger float-right ml-1" (click)="showContact('')" >Cancel</button>
+            <button type="button" id="btnCancel" class="btn btn-danger float-right ml-1" (click)="showContact('')">Cancel</button>
 
             <button type="submit" id="btnSubmit"
               class="float-right btn btn-{{status == 'save' ? 'primary' : (status == 'edit' ? 'warning': '')}}"
@@ -235,9 +279,6 @@
             </button>
 
           </div>
-
-
-
 
         </form>
       </div>

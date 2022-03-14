@@ -12,7 +12,7 @@ import { Json } from '@angular/core/src/facade/lang';
     styles:[` 
     .my-custom-scrollbar {
         position: relative;
-        height: 500px;
+        height: 400px;
         overflow: auto;
       }
       .table-wrapper-scroll-y {
@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     status: string;
     currentId: string;
     search: string;
+    range: string;
 
 
     constructor(private contactService: EmployeeService) {
@@ -38,6 +39,7 @@ export class HomeComponent implements OnInit {
         this.status = '';
         this.currentId = '';       
         this.search = '';
+        this.range ='5';
 
     }
 
