@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
+import { Json } from '@angular/core/src/facade/lang';
 
 @Component({
     selector: 'app-home',
@@ -80,6 +81,8 @@ export class HomeComponent implements OnInit {
             gender: this._formContact.value.gender,
             date: this._formContact.value.date,
         }
+
+        localStorage.setItem('contactData',Json.stringify(contactData));
 
         if (this.currentId) {
             this.contactService.updateContact(contactData, this.currentId)

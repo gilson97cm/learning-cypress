@@ -28,12 +28,11 @@
 - volver a la ventana del terminal anterormente abierta
 -ejecutar los comandos
 	- php artisan migrate:fresh --seed
-	- php artisan serve --host AQUI_VA_SU_IP --port 80
+	- php artisan serve --host AQUI_VA_SU_IP --port 80 (en la maquina remota utlizar el puerto 8080)
 - si todo va bien ya tenemos el backend configurado!!
 
 *****INSTALACIÓN FRONTEND******
 - abrir el proyecto en Visual Studio Code
 - buscar el archivo "employee.service.ts" en la ruta "app/services"
 - en la linea 12 del archivo "employee.service.ts" cambiar la ip por SU IP
-- enjecutar npm install
 - iniciar el proyecto con npm start

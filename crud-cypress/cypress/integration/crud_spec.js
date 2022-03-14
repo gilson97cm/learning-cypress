@@ -1,3 +1,4 @@
+import { Json } from "@angular/core/src/facade/lang";
 import "cypress-file-upload";
 describe("My First Test", () => {
   let ip = "192.168.0.113:80";
@@ -5,7 +6,8 @@ describe("My First Test", () => {
   let url = `http://${ip}/api/contacts`;
   let updateContactId = 18;
   let deleteContactId = 35;
-  let options = 0;
+  let options = 2;
+
 
   it("Successfully Loads", () => {
     cy.visit("/");
@@ -28,15 +30,15 @@ describe("My First Test", () => {
         "Radio 2",
         "Check 1",
       ];
-     
-        let count =0;
-        cy.get("#form")
+
+      let count = 0;
+      cy.get("#form")
         .find("label")
-        .each(x=>{
+        .each((x) => {
           expect(x[0].textContent).equal(array[count]);
           count++;
-      })
-      
+        });
+
       cy.get("#form").find("input[type=text]").should("have.length", 4);
       cy.get("#form").find("input[type=date]").should("have.length", 1);
       cy.get("#form").find("select").should("have.length", 1);
@@ -55,11 +57,11 @@ describe("My First Test", () => {
         .contains("Cancel");
     });
 
-    it('Chek inputs', () => {
-      
-      cy.get("#name:valid").type("User").should("have.length",0)
-
+    it("Chek inputs", () => {
+      cy.get("#name:valid").type("User").should("have.length", 0);
     });
+
+   
   }
 
   if (options == 1) {
@@ -160,7 +162,16 @@ describe("My First Test", () => {
       cy.get("#radio1").check();
       cy.get("#checkbox1").check();
 
-      cy.get("#btnSubmit").should("not.be.disabled").click();
+      cy.get("#btnSubmit").should("not.be.disabled").click().should(() => {
+        expect(localStorage.getItem("contactData")).to.eq(Json.stringify({
+          "name": "User",
+          "lastname": "Test",
+          "email": "user@email.com",
+          "phone": "0123456789",
+          "gender": "Male",
+          "date": "2007-01-01",
+        }));
+      });
     });
 
     it("Post with Form using submit()", function () {
@@ -229,6 +240,7 @@ describe("My First Test", () => {
       let rowSelector = `tr#${updateContactId}`;
       cy.get(rowSelector).find(".btnShow").click();
     });
+  
   }
 
   if (options == 3) {

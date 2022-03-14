@@ -1,0 +1,222 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 1,
+    "passes": 0,
+    "pending": 6,
+    "failures": -5,
+    "start": "2022-03-14T16:04:55.078Z",
+    "end": "2022-03-14T16:04:55.168Z",
+    "duration": 90,
+    "testsRegistered": 6,
+    "passPercent": null,
+    "pendingPercent": 100,
+    "other": 5,
+    "hasOther": true,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8cb73267-8199-49f3-a901-cd300d4d622e",
+      "title": "",
+      "fullFile": "cypress/integration/1-getting-started/todo.spec.js",
+      "file": "cypress/integration/1-getting-started/todo.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f365b8fa-f789-40a9-a001-3633d6d79b94",
+          "title": "example to-do app",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "displays two todo items by default",
+              "fullTitle": "example to-do app displays two todo items by default",
+              "timedOut": null,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "",
+              "err": {},
+              "uuid": "b9c36cfb-b72f-4253-b203-13bfe94fedeb",
+              "parentUUID": "f365b8fa-f789-40a9-a001-3633d6d79b94",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "can add new todo items",
+              "fullTitle": "example to-do app can add new todo items",
+              "timedOut": null,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "",
+              "err": {},
+              "uuid": "0ae13549-0574-49ff-9697-a954d73e03a0",
+              "parentUUID": "f365b8fa-f789-40a9-a001-3633d6d79b94",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "can check off an item as completed",
+              "fullTitle": "example to-do app can check off an item as completed",
+              "timedOut": null,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "",
+              "err": {},
+              "uuid": "ef6ebb14-945e-4f54-994e-4d439a43771b",
+              "parentUUID": "f365b8fa-f789-40a9-a001-3633d6d79b94",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [
+            {
+              "uuid": "c6c4d19d-ecdc-41a9-bde4-1aeb10b43a6f",
+              "title": "with a checked task",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "can filter for uncompleted tasks",
+                  "fullTitle": "example to-do app with a checked task can filter for uncompleted tasks",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "pending",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": true,
+                  "context": null,
+                  "code": "",
+                  "err": {},
+                  "uuid": "7bdbee39-2616-4ffc-b24a-ab7ad6e8fef8",
+                  "parentUUID": "c6c4d19d-ecdc-41a9-bde4-1aeb10b43a6f",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "can filter for completed tasks",
+                  "fullTitle": "example to-do app with a checked task can filter for completed tasks",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "pending",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": true,
+                  "context": null,
+                  "code": "",
+                  "err": {},
+                  "uuid": "ad6ed55b-cf8d-4d99-9852-f23353788120",
+                  "parentUUID": "c6c4d19d-ecdc-41a9-bde4-1aeb10b43a6f",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "can delete all completed tasks",
+                  "fullTitle": "example to-do app with a checked task can delete all completed tasks",
+                  "timedOut": null,
+                  "duration": 0,
+                  "state": "pending",
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": true,
+                  "context": null,
+                  "code": "",
+                  "err": {},
+                  "uuid": "d9ec9dd5-a3a5-434f-bb00-66ee25b2d9ae",
+                  "parentUUID": "c6c4d19d-ecdc-41a9-bde4-1aeb10b43a6f",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [],
+              "pending": [
+                "7bdbee39-2616-4ffc-b24a-ab7ad6e8fef8",
+                "ad6ed55b-cf8d-4d99-9852-f23353788120",
+                "d9ec9dd5-a3a5-434f-bb00-66ee25b2d9ae"
+              ],
+              "skipped": [],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [
+            "b9c36cfb-b72f-4253-b203-13bfe94fedeb",
+            "0ae13549-0574-49ff-9697-a954d73e03a0",
+            "ef6ebb14-945e-4f54-994e-4d439a43771b"
+          ],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.2"
+    },
+    "marge": {
+      "options": {
+        "charts": true,
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress/report"
+      },
+      "version": "6.1.1"
+    }
+  }
+}

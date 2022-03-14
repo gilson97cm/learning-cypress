@@ -13,6 +13,7 @@ var forms_2 = require('@angular/forms');
 var forms_3 = require('@angular/forms');
 var core_1 = require('@angular/core');
 var employee_service_1 = require('../../services/employee.service');
+var lang_1 = require('@angular/core/src/facade/lang');
 var HomeComponent = (function () {
     function HomeComponent(contactService) {
         this.contactService = contactService;
@@ -56,6 +57,7 @@ var HomeComponent = (function () {
             gender: this._formContact.value.gender,
             date: this._formContact.value.date,
         };
+        localStorage.setItem('contactData', lang_1.Json.stringify(contactData));
         if (this.currentId) {
             this.contactService.updateContact(contactData, this.currentId)
                 .then(function (resp) {
