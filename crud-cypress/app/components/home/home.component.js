@@ -15,8 +15,8 @@ var core_1 = require('@angular/core');
 var employee_service_1 = require('../../services/employee.service');
 var lang_1 = require('@angular/core/src/facade/lang');
 var HomeComponent = (function () {
-    function HomeComponent(contactService) {
-        this.contactService = contactService;
+    function HomeComponent(_contactService) {
+        this._contactService = _contactService;
         this.contacts = null;
         this.contact = {};
         this.response = {};
@@ -31,7 +31,7 @@ var HomeComponent = (function () {
     };
     HomeComponent.prototype.listOfContacts = function () {
         var _this = this;
-        this.contactService.listOfContacts()
+        this._contactService.listOfContacts()
             .subscribe(function (contacts) { return _this.contacts = contacts; }, function (error) { return console.error("Error: " + error); });
         setTimeout(function () { return _this.response = {}; }, 2000);
     };
@@ -40,34 +40,34 @@ var HomeComponent = (function () {
         this.status = status;
         if (status == 'save') {
             this.currentId = '';
-            this._formContact.reset();
+            this.formContact.reset();
         }
         if (id) {
             this.currentId = id;
-            this.contactService.showContact(id)
+            this._contactService.showContact(id)
                 .subscribe(function (contact) { return _this.contact = contact; }, function (error) { return console.error("Error: " + error); });
         }
     };
     HomeComponent.prototype.addOrEditContact = function () {
         var _this = this;
         var contactData = {
-            name: this._formContact.value.name,
-            lastname: this._formContact.value.lastname,
-            email: this._formContact.value.email,
-            phone: this._formContact.value.phone,
-            gender: this._formContact.value.gender,
-            date: this._formContact.value.date,
+            name: this.formContact.value.name,
+            lastname: this.formContact.value.lastname,
+            email: this.formContact.value.email,
+            phone: this.formContact.value.phone,
+            gender: this.formContact.value.gender,
+            date: this.formContact.value.date,
         };
         localStorage.setItem('contactData', lang_1.Json.stringify(contactData));
         if (this.currentId) {
-            this.contactService.updateContact(contactData, this.currentId)
+            this._contactService.updateContact(contactData, this.currentId)
                 .then(function (resp) {
                 _this.listOfContacts();
                 _this.response = resp;
             });
         }
         else {
-            this.contactService.storeContact(contactData)
+            this._contactService.storeContact(contactData)
                 .then(function (resp) {
                 _this.listOfContacts();
                 _this.response = resp;
@@ -79,19 +79,19 @@ var HomeComponent = (function () {
         var _this = this;
         this.showContact('edit');
         this.currentId = id;
-        this.contactService.showContact(id)
-            .subscribe(function (contact) { return _this._formContact.patchValue(contact); }, function (error) { return console.error("Error: " + error); });
+        this._contactService.showContact(id)
+            .subscribe(function (contact) { return _this.formContact.patchValue(contact); }, function (error) { return console.error("Error: " + error); });
     };
     HomeComponent.prototype.deleteContact = function (id) {
         var _this = this;
-        this.contactService.deleteContact(id)
+        this._contactService.deleteContact(id)
             .then(function (resp) {
             _this.listOfContacts();
             _this.response = resp;
         });
     };
     HomeComponent.prototype.initForm = function () {
-        this._formContact = new forms_3.FormGroup({
+        this.formContact = new forms_3.FormGroup({
             name: new forms_2.FormControl('', [
                 forms_1.Validators.required,
                 forms_1.Validators.pattern("^.{4,}$")

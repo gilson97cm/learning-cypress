@@ -19,10 +19,9 @@ var EmployeesComponent = (function () {
         this.employee = {};
     }
     EmployeesComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        var id = +this.activateRoute.snapshot.params['id'];
-        var h = this.employeeSvc.infoEmployee(id)
-            .then(function (employee) { return _this.employee = employee; });
+        // let id = +this.activateRoute.snapshot.params['id'];
+        // let h= this.employeeSvc.infoEmployee(id)
+        //     .then(employee => this.employee = employee);
     };
     EmployeesComponent.prototype.backAbout = function () {
         this.router.navigate(['about']);

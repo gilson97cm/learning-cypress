@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,12 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i<=50; $i++){
+        $faker = Faker::create();
+        for ($i = 1; $i<=25; $i++){
             \App\User::create([
-                'name' => 'User '.$i,
-                'lastname' => 'Test',
+                'name' => $faker->firstname,
+                'lastname' => $faker->lastname,
                 'phone' => rand(1000000000,9999999999),
-                'email' => 'user'.$i.'@email.com',
+                'email' => $faker->email,
                 'gender' => $i%2==0 ? 'Masculino' : 'Femenino',
                 'date' => now()->format('Y-m-d')
             ]);

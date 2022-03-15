@@ -9,7 +9,7 @@ import { Json } from '@angular/core/src/facade/lang';
 @Component({
     selector: 'app-home',
     templateUrl: 'app/components/home/home.component.html',
-    styles:[` 
+    styles: [` 
     .my-custom-scrollbar {
         position: relative;
         height: 400px;
@@ -18,11 +18,11 @@ import { Json } from '@angular/core/src/facade/lang';
       .table-wrapper-scroll-y {
         display: block;
       }`
-      ]
+    ]
 })
 
 export class HomeComponent implements OnInit {
-    _formContact: FormGroup;
+    formContact: FormGroup;
     contacts: Observable<any[]>;
     contact: Object;
     response: Object;
@@ -32,14 +32,14 @@ export class HomeComponent implements OnInit {
     range: string;
 
 
-    constructor(private contactService: EmployeeService) {
+    constructor(private _contactService: EmployeeService) {
         this.contacts = null;
         this.contact = {};
         this.response = {};
         this.status = '';
-        this.currentId = '';       
+        this.currentId = '';
         this.search = '';
-        this.range ='5';
+        this.range = '5';
 
     }
 
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
     }
 
     listOfContacts() {
-        this.contactService.listOfContacts()
+        this._contactService.listOfContacts()
             .subscribe(contacts => this.contacts = contacts,
                 error => console.error(`Error: ${error}`));
 
@@ -62,12 +62,12 @@ export class HomeComponent implements OnInit {
 
         if (status == 'save') {
             this.currentId = '';
-            this._formContact.reset();
+            this.formContact.reset();
         }
 
         if (id) {
             this.currentId = id;
-            this.contactService.showContact(id)
+            this._contactService.showContact(id)
                 .subscribe(contact => this.contact = contact,
                     error => console.error(`Error: ${error}`))
         }
@@ -76,25 +76,25 @@ export class HomeComponent implements OnInit {
     addOrEditContact() {
 
         let contactData = {
-            name: this._formContact.value.name,
-            lastname: this._formContact.value.lastname,
-            email: this._formContact.value.email,
-            phone: this._formContact.value.phone,
-            gender: this._formContact.value.gender,
-            date: this._formContact.value.date,
+            name: this.formContact.value.name,
+            lastname: this.formContact.value.lastname,
+            email: this.formContact.value.email,
+            phone: this.formContact.value.phone,
+            gender: this.formContact.value.gender,
+            date: this.formContact.value.date,
         }
 
-        localStorage.setItem('contactData',Json.stringify(contactData));
+        localStorage.setItem('contactData', Json.stringify(contactData));
 
         if (this.currentId) {
-            this.contactService.updateContact(contactData, this.currentId)
+            this._contactService.updateContact(contactData, this.currentId)
                 .then(resp => {
                     this.listOfContacts();
                     this.response = resp;
                 });
 
         } else {
-            this.contactService.storeContact(contactData)
+            this._contactService.storeContact(contactData)
                 .then(resp => {
                     this.listOfContacts();
                     this.response = resp;
@@ -110,23 +110,23 @@ export class HomeComponent implements OnInit {
     editContact(id) {
         this.showContact('edit');
         this.currentId = id;
-        this.contactService.showContact(id)
-            .subscribe(contact => this._formContact.patchValue(contact),
+        this._contactService.showContact(id)
+            .subscribe(contact => this.formContact.patchValue(contact),
                 error => console.error(`Error: ${error}`))
     }
 
 
     deleteContact(id) {
-        this.contactService.deleteContact(id)
+        this._contactService.deleteContact(id)
             .then(resp => {
                 this.listOfContacts();
                 this.response = resp;
             });
     }
-    
+
     private initForm() {
-        
-        this._formContact = new FormGroup({
+
+        this.formContact = new FormGroup({
             name: new FormControl('', [
                 Validators.required,
                 Validators.pattern("^.{4,}$")
@@ -136,38 +136,18 @@ export class HomeComponent implements OnInit {
                 Validators.pattern("^.{4,}$")
             ]),
             email: new FormControl('', [
-                Validators.required, 
+                Validators.required,
                 Validators.pattern("[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?")
             ]),
-            phone: new FormControl('',[
+            phone: new FormControl('', [
                 Validators.pattern("[0-9]{10}")
             ]),
             gender: new FormControl(''),
             date: new FormControl(''),
             file: new FormControl(''),
             range: new FormControl(''),
-            radios: new FormControl('',[Validators.required]),
-            checkbox1: new FormControl('',[Validators.required]),
-       
-            
+            radios: new FormControl('', [Validators.required]),
+            checkbox1: new FormControl('', [Validators.required]),
         });
     }
-    
-    // onSearch(searchValue: string): void {  
-    
-    //    if(searchValue == ''){
-    //        this.listOfContacts();
-    //    }else{
-    //     console.log(searchValue);
-    
-    //     let aux = this.contacts.filter(x => x.name.toLowerCase() == searchValue.toLowerCase());
-        
-    //     if(aux.length > 0){
-    //         this.contacts = aux;
-    //     }
-    
-    //    console.log(this.contacts);
-    //    }
-       
-    //   }
 }

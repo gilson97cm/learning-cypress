@@ -20,13 +20,6 @@ var EmployeeService = (function () {
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.options = new http_1.RequestOptions({ headers: this.headers });
     }
-    EmployeeService.prototype.infoEmployee = function (id) {
-        var URL = "https://jsonplaceholder.typicode.com/users/" + id;
-        return this.http.get(URL)
-            .toPromise()
-            .then(function (resp) { return resp.json(); })
-            .catch(this.ocurredAnError);
-    };
     EmployeeService.prototype.listOfContacts = function () {
         return this.http.get(this.URL)
             .map(function (resp) { return resp.json().contacts; });
