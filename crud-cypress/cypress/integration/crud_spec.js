@@ -225,6 +225,83 @@ describe("My First Test", () => {
       .next()
       .contains("Delete")
     });
+
+    it('Commands - Not', () => {
+      cy.get("#btnAdd").click();
+      cy.get('#phone').not('.required'); 
+      cy.get("#btnCancel").click();
+
+    });
+
+    it('Commands - Parent', () => {
+      cy.get('tbody').parent().should('have.class', 'table')
+    });
+
+    it('Commands - Pause', () => {
+      cy.get("#btnAdd").pause() 
+    });
+
+    it('Commands - Prev', () => {
+      cy.get("table").find("tbody>tr>td").eq(6)
+      .contains("Delete")
+      .closest("td")
+      .prev()
+      .contains("Edit")
+      .closest("td")
+      .prev()
+      .contains("Show")
+    });
+
+    it('Commands - ReadFile', () => {
+      cy.readFile('cypress/fixtures/users.json').each(x => {
+        cy.log(Json.stringify(x))
+      })
+    });
+
+    it('Commands - Reload', () => {
+      cy.visit('/')
+      cy.reload(true)
+    });
+
+    it('Commands - Server', () => {
+      cy.server({ delay: 1500 })
+    });
+    
+    it('Commands - Siblings', () => {
+      cy.get('td').siblings()
+    });
+
+    it('Commands - Title', () => {
+      cy.title().should('eq', 'Learning Cypress')
+    });
+
+    it('Commands - Trigger', () => {
+      cy.get('#btnAdd').trigger('mouseover') 
+    });
+
+    it('Commands -Url', () => {
+      cy.url().should('include', '/localhost')
+    });
+
+    it('Cypress.arch', () => {
+      cy.log(Cypress.arch)
+      if (Cypress.arch === 'x82') {
+        cy.log('do something')
+      } else {
+        cy.log('do something else')
+      }
+    });
+
+    it('Cypress.config', () => {
+        
+        cy.writeFile('cypress/fixtures/config.json',Cypress.config())
+    });
+
+    it('Cypress.dom', () => {
+      cy.get('table').then(($el) => {
+        Cypress.dom.isDom($el) // true
+      })
+    });
   }
 
   if (options == 1) {
@@ -234,6 +311,7 @@ describe("My First Test", () => {
         url: url,
       }).then(function (response) {
         expect(response.body).have.property("contacts");
+        cy.writeFile('cypress/fixtures/contacts.json', response.body)
       });
     });
 

@@ -1,0 +1,288 @@
+{
+  "experimentalStudio": true,
+  "baseUrl": "http://localhost:3000/",
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "charts": true,
+    "overwrite": false,
+    "html": false,
+    "json": true,
+    "reportDir": "cypress/report"
+  },
+  "projectRoot": "c:\\laragon\\www\\learning_cypress\\crud-cypress",
+  "projectName": "crud-cypress",
+  "rawJson": {
+    "experimentalStudio": true,
+    "baseUrl": "http://localhost:3000/",
+    "reporter": "mochawesome",
+    "reporterOptions": {
+      "charts": true,
+      "overwrite": false,
+      "html": false,
+      "json": true,
+      "reportDir": "cypress/report"
+    },
+    "envFile": {},
+    "projectRoot": "c:\\laragon\\www\\learning_cypress\\crud-cypress",
+    "projectName": "crud-cypress"
+  },
+  "configFile": "cypress.json",
+  "report": false,
+  "browsers": [
+    {
+      "name": "chrome",
+      "family": "chromium",
+      "channel": "stable",
+      "displayName": "Chrome",
+      "version": "99.0.4844.51",
+      "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "minSupportedVersion": 64,
+      "majorVersion": 99
+    },
+    {
+      "name": "firefox",
+      "family": "firefox",
+      "channel": "stable",
+      "displayName": "Firefox",
+      "version": "98.0.1.8107",
+      "path": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+      "minSupportedVersion": 86,
+      "majorVersion": 98
+    },
+    {
+      "name": "edge",
+      "family": "chromium",
+      "channel": "stable",
+      "displayName": "Edge",
+      "version": "99.0.1150.39",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+      "minSupportedVersion": 79,
+      "majorVersion": 99
+    },
+    {
+      "name": "electron",
+      "channel": "stable",
+      "family": "chromium",
+      "displayName": "Electron",
+      "version": "94.0.4606.81",
+      "path": "",
+      "majorVersion": 94,
+      "info": "Electron is the default browser that comes with Cypress. This is the default browser that runs in headless mode. Selecting this browser is useful when debugging. The version number indicates the underlying Chromium version that Electron uses."
+    }
+  ],
+  "animationDistanceThreshold": 5,
+  "blockHosts": null,
+  "chromeWebSecurity": true,
+  "clientCertificates": [],
+  "component": {},
+  "componentFolder": "c:\\laragon\\www\\learning_cypress\\crud-cypress\\cypress\\component",
+  "defaultCommandTimeout": 4000,
+  "downloadsFolder": "c:\\laragon\\www\\learning_cypress\\crud-cypress\\cypress\\downloads",
+  "e2e": {},
+  "execTimeout": 60000,
+  "exit": true,
+  "experimentalFetchPolyfill": false,
+  "experimentalInteractiveRunEvents": false,
+  "experimentalSessionSupport": false,
+  "experimentalSourceRewriting": false,
+  "fileServerFolder": "c:\\laragon\\www\\learning_cypress\\crud-cypress",
+  "fixturesFolder": "c:\\laragon\\www\\learning_cypress\\crud-cypress\\cypress\\fixtures",
+  "ignoreTestFiles": "*.hot-update.js",
+  "includeShadowDom": false,
+  "integrationFolder": "c:\\laragon\\www\\learning_cypress\\crud-cypress\\cypress\\integration",
+  "keystrokeDelay": 0,
+  "modifyObstructiveCode": true,
+  "numTestsKeptInMemory": 50,
+  "pageLoadTimeout": 60000,
+  "pluginsFile": "c:\\laragon\\www\\learning_cypress\\crud-cypress\\cypress\\plugins\\index.js",
+  "port": 57817,
+  "projectId": null,
+  "redirectionLimit": 20,
+  "requestTimeout": 5000,
+  "resolvedNodePath": "C:\\Program Files\\nodejs\\node.exe",
+  "resolvedNodeVersion": "16.14.0",
+  "responseTimeout": 30000,
+  "retries": {
+    "runMode": 0,
+    "openMode": 0
+  },
+  "screenshotOnRunFailure": true,
+  "screenshotsFolder": "c:\\laragon\\www\\learning_cypress\\crud-cypress\\cypress\\screenshots",
+  "slowTestThreshold": 10000,
+  "scrollBehavior": "top",
+  "supportFile": "c:\\laragon\\www\\learning_cypress\\crud-cypress\\cypress\\support\\index.js",
+  "supportFolder": "c:\\laragon\\www\\learning_cypress\\crud-cypress\\cypress\\support",
+  "taskTimeout": 60000,
+  "testFiles": "**/*.*",
+  "trashAssetsBeforeRuns": true,
+  "userAgent": null,
+  "video": true,
+  "videoCompression": 32,
+  "videosFolder": "c:\\laragon\\www\\learning_cypress\\crud-cypress\\cypress\\videos",
+  "videoUploadOnPasses": true,
+  "viewportHeight": 660,
+  "viewportWidth": 1000,
+  "waitForAnimations": true,
+  "watchForFileChanges": true,
+  "autoOpen": false,
+  "clientRoute": "/__/",
+  "devServerPublicPathRoute": "/__cypress/src",
+  "hosts": null,
+  "isInteractive": true,
+  "isTextTerminal": false,
+  "morgan": true,
+  "namespace": "__cypress",
+  "reporterRoute": "/__cypress/reporter",
+  "socketId": null,
+  "socketIoCookie": "__socket.io",
+  "socketIoRoute": "/__socket.io",
+  "xhrRoute": "/xhrs/",
+  "cypressEnv": "production",
+  "parentTestsFolder": "c:\\laragon\\www\\learning_cypress\\crud-cypress\\cypress",
+  "parentTestsFolderDisplay": "crud-cypress\\cypress",
+  "isNewProject": false,
+  "proxyUrl": "http://localhost:57817",
+  "browserUrl": "http://localhost:3000/__/",
+  "reporterUrl": "http://localhost:3000/__cypress/reporter",
+  "xhrUrl": "__cypress/xhrs/",
+  "proxyServer": "http://localhost:57817",
+  "version": "9.5.1",
+  "platform": "win32",
+  "arch": "x64",
+  "spec": {
+    "name": "crud_spec.js",
+    "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/crud_spec.js",
+    "relative": "cypress/integration/crud_spec.js",
+    "specType": "integration",
+    "specFilter": null
+  },
+  "specs": [
+    {
+      "name": "1-getting-started/todo.spec.js",
+      "relative": "cypress/integration/1-getting-started/todo.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/1-getting-started/todo.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/actions.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/actions.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/actions.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/aliasing.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/aliasing.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/aliasing.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/assertions.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/assertions.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/assertions.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/connectors.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/connectors.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/connectors.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/cookies.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/cookies.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/cookies.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/cypress_api.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/cypress_api.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/cypress_api.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/files.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/files.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/files.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/local_storage.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/local_storage.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/local_storage.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/location.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/location.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/location.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/misc.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/misc.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/misc.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/navigation.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/navigation.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/navigation.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/network_requests.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/network_requests.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/network_requests.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/querying.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/querying.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/querying.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/spies_stubs_clocks.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/spies_stubs_clocks.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/spies_stubs_clocks.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/traversal.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/traversal.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/traversal.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/utilities.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/utilities.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/utilities.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/viewport.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/viewport.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/viewport.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/waiting.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/waiting.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/waiting.spec.js"
+    },
+    {
+      "name": "2-advanced-examples/window.spec.js",
+      "relative": "cypress/integration/2-advanced-examples/window.spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/2-advanced-examples/window.spec.js"
+    },
+    {
+      "name": "crud_spec.js",
+      "relative": "cypress/integration/crud_spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/crud_spec.js"
+    },
+    {
+      "name": "debugger-test.js",
+      "relative": "cypress/integration/debugger-test.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/debugger-test.js"
+    },
+    {
+      "name": "home_page_spec.js",
+      "relative": "cypress/integration/home_page_spec.js",
+      "absolute": "c:/laragon/www/learning_cypress/crud-cypress/cypress/integration/home_page_spec.js"
+    }
+  ],
+  "browser": {
+    "displayName": "Chrome",
+    "name": "chrome",
+    "family": "chromium",
+    "channel": "stable",
+    "version": "99.0.4844.51",
+    "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "majorVersion": 99,
+    "isChosen": true,
+    "isHeaded": true,
+    "isHeadless": false
+  }
+}
