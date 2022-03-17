@@ -16,14 +16,6 @@ export class EmployeeService {
 
     constructor(private http:Http){}
 
-    infoEmployee(id:number){
-        let URL = `https://jsonplaceholder.typicode.com/users/${id}`;
-        return this.http.get(URL)
-            .toPromise()
-            .then(resp => resp.json())
-            .catch(this.ocurredAnError);
-    }
-
     listOfContacts(){
          return this.http.get(this.URL)
              .map(resp => resp.json().contacts );

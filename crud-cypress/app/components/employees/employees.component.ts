@@ -18,9 +18,9 @@ export class EmployeesComponent implements OnInit {
     }
 
     ngOnInit() {
-        let id = +this.activateRoute.snapshot.params['id'];
-        let h= this.employeeSvc.infoEmployee(id)
-            .then(employee => this.employee = employee);
+        // let id = +this.activateRoute.snapshot.params['id'];
+        // let h= this.employeeSvc.infoEmployee(id)
+        //     .then(employee => this.employee = employee);
     }
 
     backAbout() {

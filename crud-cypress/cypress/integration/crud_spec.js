@@ -12,73 +12,51 @@ describe("My First Test", () => {
   });
 
   if (options == 0) {
-    // it("Test from type #1", () => {
-    //   cy.get("#btnAdd").click();
+    it("Test from type #1", () => {
+      cy.get("#btnAdd").click();
+      cy.get("#form").find("input[type=text]").should("have.length", 4);
+      cy.get("#form").find("input[type=date]").should("have.length", 1);
+      cy.get("#form").find("select").should("have.length", 1);
+      cy.get("#form").find("input[type=radio]").should("have.length", 3);
+      cy.get("#form").find("input[type=checkbox]").should("have.length", 2);
+      cy.get("#form").find("input[type=file]").should("have.length", 1);
+      cy.get("#form").find("input[type=range]").should("have.length", 1);
+      cy.get("#form")
+        .find("button[type=submit]")
+        .should("have.length", 1)
+        .should("be.disabled")
+        .contains("Save");
+      cy.get("#form")
+        .find("button[type=button]")
+        .should("have.length", 1)
+        .contains("Cancel");
 
-    //   let array = [
-    //     "Name*",
-    //     "Lastname*",
-    //     "Email*",
-    //     "Phone",
-    //     "Gender",
-    //     "Date",
-    //     "File",
-    //     "Range",
-    //     "Radio 1",
-    //     "Radio 2",
-    //     "Check 1",
-    //   ];
+      cy.get("#btnCancel").click();
+    });
 
-    //   let count = 0;
-    //   cy.get("#form")
-    //     .find("label")
-    //     .each((x) => {
-    //       expect(x[0].textContent).equal(array[count]);
-    //       count++;
-    //     });
-
-    //   cy.get("#form").find("input[type=text]").should("have.length", 4);
-    //   cy.get("#form").find("input[type=date]").should("have.length", 1);
-    //   cy.get("#form").find("select").should("have.length", 1);
-    //   cy.get("#form").find("input[type=radio]").should("have.length", 2);
-    //   cy.get("#form").find("input[type=checkbox]").should("have.length", 1);
-    //   cy.get("#form").find("input[type=file]").should("have.length", 1);
-    //   cy.get("#form").find("input[type=range]").should("have.length", 1);
-    //   cy.get("#form")
-    //     .find("button[type=submit]")
-    //     .should("have.length", 1)
-    //     .should("be.disabled")
-    //     .contains("Save");
-    //   cy.get("#form")
-    //     .find("button[type=button]")
-    //     .should("have.length", 1)
-    //     .contains("Cancel");
-
-    // });
-
-    it("Click", () => {
+    it("Actions - Click", () => {
       cy.get("#btnAdd").click();
     });
 
-    it("Type", () => {
+    it("Actions - Type", () => {
       cy.get("#email")
         .type("fake@email.com")
         .should("have.value", "fake@email.com");
     });
 
-    it("Focus", () => {
+    it("Actions - Focus", () => {
       cy.get("#name").focus();
     });
 
-    it("Blur", () => {
+    it("Actions - Blur", () => {
       cy.get("#name").blur();
     });
 
-    it("Clear", () => {
+    it("Actions - Clear", () => {
       cy.get("#email").clear().should("have.value", "");
     });
 
-    it("Check", () => {
+    it("Actions - Check", () => {
       cy.get(".nav-tabs li").eq(1).click();
       cy.get('input[type="checkbox"]')
         .not("[disabled]")
@@ -88,33 +66,30 @@ describe("My First Test", () => {
       cy.get('input[type="radio"]').check("option3");
     });
 
-    it("Uncheck", () => {
+    it("Actions - Uncheck", () => {
       cy.get('input[type="checkbox"]')
         .not("[disabled]")
         .uncheck()
         .should("not.be.checked");
     });
 
-    it('Trigger', () => {
-      cy.get('#range')
-        .invoke('val', 25)
-        .trigger('change')
-        .get('input[type=range]').siblings('p')
-        .should('have.text', '25')
+    it("Actions - Trigger", () => {
+      cy.get("#range").invoke("val", 25).trigger("change");
+      // .get('#range').siblings('p')
+      // .should('have.text', '25')
     });
 
-    it("Select", () => {
+    it("Actions - Select", () => {
       cy.get(".nav-tabs li").first().click();
       cy.get("#gender").select("Male");
     });
 
     it("Scroll", () => {
       cy.get("#btnCancel").click();
-      // cy.get(".my-custom-scrollbar")
 
       cy.get("table")
         .invoke("height")
-        .then(x => {
+        .then((x) => {
           if (x > 400) {
             cy.get(".my-custom-scrollbar").scrollTo("bottom");
           }
@@ -122,8 +97,209 @@ describe("My First Test", () => {
     });
 
     it("Screenshot", () => {
-      //cy.wait(2000);
-      // cy.get(".table").screenshot();
+      cy.wait(2000);
+      cy.get(".table").screenshot();
+    });
+
+    it("Aliasing", () => {
+      cy.get("table").find("tbody>tr").first().find(".btnShow").as("firstBtn");
+
+      cy.get("@firstBtn").click();
+
+      cy.get("#btnList").as("btnReturn");
+      cy.get("@btnReturn").click();
+    });
+
+    it("Connectors - Each", () => {
+      cy.get("#btnAdd").click();
+
+      let array = [
+        "Name*",
+        "Lastname*",
+        "Email*",
+        "Phone",
+        "Gender",
+        "Date",
+        "File",
+        "Range",
+        "Radio 1",
+        "Radio 2",
+        "Radio 3",
+        "Check 1",
+        "Check 2",
+      ];
+
+      let count = 0;
+      cy.get("#form")
+        .find("label")
+        .each((x) => {
+          expect(x[0].textContent).equal(array[count]);
+          count++;
+        });
+
+      cy.get("#btnCancel").click();
+    });
+
+    it("Connectors -Its", () => {
+      cy.get(".contactList tr").its("length").should("be.gt", 2);
+    });
+
+    it("Connectors - Invoke & Then", () => {
+      cy.get("table")
+        .find("tbody>tr")
+        .first()
+        .find("td")
+        .eq(2)
+        .invoke("text")
+        .then((text) => {
+          expect(text.length).to.be.at.least(2);
+        });
+    });
+
+    it("Commands - And", () => {
+      cy.get(".contactList tr")
+        .its("length")
+        .should("be.gt", 1)
+        .and("be.lt", 60);
+    });
+
+    it("Commands - Children", () => {
+      cy.get("tbody").children("tr").find(".btn");
+    });
+
+    it("Commands - Clock", () => {
+      cy.get("#btnAdd").click();
+      cy.clock();
+      cy.get("input[id=name]").type("Jane Lane");
+      cy.clock().then((clock) => {
+        clock.tick(1000);
+      });
+      cy.get("#btnCancel").click();
+    });
+
+    it("Commands - Closest", () => {
+      cy.get("td").closest("tr");
+    });
+
+    it("Commands - Debug ", () => {
+      cy.get("table").debug();
+    });
+
+    it("Commands - Document", () => {
+      cy.document().its("contentType").should("eq", "text/html");
+    });
+
+    it("Commands -Exec", () => {
+      // cy.exec('npm install')
+    });
+
+    it("Commands - Focused", () => {
+      cy.get("#btnAdd").click();
+      cy.get("#name").focus();
+      cy.focused().should("have.attr", "name");
+    });
+
+    it("Commands - Hash", () => {
+      cy.visit("/#newSection");
+      cy.hash().should("eq", "#newSection");
+    });
+
+    it('Commands - Last', () => {
+      cy.get("table").find("tbody>tr").last().find(".btnEdit").as("lastBtn");
+      cy.get("@lastBtn").click();
+      cy.get("#btnCancel").click();
+    });
+
+    it('Commands - Log', () => {
+      cy.log('My custom message')
+    });
+
+    it('Commands - Closest & Next', () => {
+      cy.get("table").find("tbody>tr>td").eq(4)
+      .contains("Show")
+      .closest("td")
+      .next()
+      .contains("Edit")
+      .closest("td")
+      .next()
+      .contains("Delete")
+    });
+
+    it('Commands - Not', () => {
+      cy.get("#btnAdd").click();
+      cy.get('#phone').not('.required'); 
+      cy.get("#btnCancel").click();
+
+    });
+
+    it('Commands - Parent', () => {
+      cy.get('tbody').parent().should('have.class', 'table')
+    });
+
+    it('Commands - Pause', () => {
+      cy.get("#btnAdd").pause() 
+    });
+
+    it('Commands - Prev', () => {
+      cy.get("table").find("tbody>tr>td").eq(6)
+      .contains("Delete")
+      .closest("td")
+      .prev()
+      .contains("Edit")
+      .closest("td")
+      .prev()
+      .contains("Show")
+    });
+
+    it('Commands - ReadFile', () => {
+      cy.readFile('cypress/fixtures/users.json').each(x => {
+        cy.log(Json.stringify(x))
+      })
+    });
+
+    it('Commands - Reload', () => {
+      cy.visit('/')
+      cy.reload(true)
+    });
+
+    it('Commands - Server', () => {
+      cy.server({ delay: 1500 })
+    });
+    
+    it('Commands - Siblings', () => {
+      cy.get('td').siblings()
+    });
+
+    it('Commands - Title', () => {
+      cy.title().should('eq', 'Learning Cypress')
+    });
+
+    it('Commands - Trigger', () => {
+      cy.get('#btnAdd').trigger('mouseover') 
+    });
+
+    it('Commands -Url', () => {
+      cy.url().should('include', '/localhost')
+    });
+
+    it('Cypress.arch', () => {
+      cy.log(Cypress.arch)
+      if (Cypress.arch === 'x82') {
+        cy.log('do something')
+      } else {
+        cy.log('do something else')
+      }
+    });
+
+    it('Cypress.config', () => {
+        
+        cy.writeFile('cypress/fixtures/config.json',Cypress.config())
+    });
+
+    it('Cypress.dom', () => {
+      cy.get('table').then(($el) => {
+        Cypress.dom.isDom($el) // true
+      })
     });
   }
 
@@ -134,6 +310,7 @@ describe("My First Test", () => {
         url: url,
       }).then(function (response) {
         expect(response.body).have.property("contacts");
+        cy.writeFile('cypress/fixtures/contacts.json', response.body)
       });
     });
 
@@ -328,7 +505,6 @@ describe("My First Test", () => {
       cy.get("#div-body")
         .then(($body) => {
           if ($body.find("#newInput").length) {
-            console.log($body.find("#newInput").length);
             return "input";
           }
           return "textarea";
@@ -371,40 +547,40 @@ describe("My First Test", () => {
   }
 
   if (options == 4) {
-    const semver = require('semver')
-    if (semver.gte(Cypress.version, '1.1.3')) {
-      it('Cypress.version', () => {
-        cy.log(Cypress.version)
-        expect(Cypress.platform).to.be.a('string')
-      })
+    const semver = require("semver");
+    if (semver.gte(Cypress.version, "1.1.3")) {
+      it("Cypress.version", () => {
+        cy.log(Cypress.version);
+        expect(Cypress.platform).to.be.a("string");
+      });
     }
   }
 
   if (options == 5) {
-    it('Cypress spec', () => {
-      cy.log(Cypress.spec.name)
-      expect(Cypress.spec.name).to.be.eq('crud_spec.js')
-    })
+    it("Cypress spec", () => {
+      cy.log(Cypress.spec.name);
+      expect(Cypress.spec.name).to.be.eq("crud_spec.js");
+    });
   }
 
   if (options == 6) {
-    it('Cypress location', () => {
+    it("Cypress location", () => {
       cy.location().should((loc) => {
-        expect(loc.href).to.include('localhost:3000')
-      })
-    })
+        expect(loc.href).to.include("localhost:3000");
+      });
+    });
   }
 
   if (options == 7) {
-    it('Navigation', () => {
-      cy.reload()
+    it("Navigation", () => {
+      cy.reload();
       cy.wait(4000);
       cy.reload(true)
     })
   }
 
   if (options == 8) {
-    it('Network Request', () => {
+    it("Network Request", () => {
       cy.intercept(
         {
           method: 'GET',

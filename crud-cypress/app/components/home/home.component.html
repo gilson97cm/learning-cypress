@@ -10,10 +10,6 @@
         }}
       </h4>
 
-      <!-- <input type="text" class="form-control w-50" *ngIf="status == ''" 
-        placeholder="Type to Search" 
-        (input)="onSearch($event.target.value)"> -->
-
       <button hidden id="btnDeleteMultiple" class="btn btn-sm btn-success" *ngIf="status == ''"
         (click)="showContact('')">
         <i class="fa fa-plus" aria-hidden="true"></i> Delete Selected
@@ -21,7 +17,7 @@
       <button id="btnAdd" class="btn btn-sm btn-success" *ngIf="status == ''" (click)="showContact('save')">
         <i class="fa fa-plus" aria-hidden="true"></i> Add
       </button>
-      <button class="btn btn-sm btn-info" *ngIf="status == 'show'" (click)="showContact('')">
+      <button id="btnList" class="btn btn-sm btn-info" *ngIf="status == 'show'" (click)="showContact('')">
         <i class="fa fa-list" aria-hidden="true"></i> List
       </button>
 
@@ -47,7 +43,7 @@
                 <td>{{contact.lastname}}</td>
                 <td class="email">{{contact.email}}</td>
                 <td>
-                  <button class="btn btn-sm btn-primary btnShow" (click)="showContact('show', contact.id)">
+                  <button class="btn btn-sm btn-primary btnShow" (click)="showContact('show', contact.id)" [disabled]="contact.id % 2 == 1">
                     <i class="fa fa-info-circle" aria-hidden="true"></i> Show
                   </button>
                 </td>
@@ -77,6 +73,7 @@
         <div class="utility-blob"></div>
       </div>
 
+
       <div *ngIf="status == 'show'">
         <div class="row">
           <div class="col-md-6">
@@ -94,7 +91,7 @@
       </div>
       <div *ngIf="status === 'save' || status === 'edit'">
 
-        <form [formGroup]="_formContact" (submit)="addOrEditContact()" id="form">
+        <form [formGroup]="formContact" (submit)="addOrEditContact()" id="form">
 
           <ul class="nav nav-tabs" id="tabs"> 
             <li class="nav-item active" id="tabChildren">
@@ -114,12 +111,12 @@
                   <div class="form-group">
                     <label>Name*</label>
                     <input class="form-control i-name" type="text" id="name" name="name" formControlName="name">
-                    <div *ngIf="!_formContact.controls['name'].valid && _formContact.controls['name'].touched"
+                    <div *ngIf="!formContact.controls['name'].valid && formContact.controls['name'].touched"
                       class="mt-1">
-                      <span class="text-danger" *ngIf="_formContact.controls['name'].errors['required']">
+                      <span class="text-danger" *ngIf="formContact.controls['name'].errors['required']">
                         The field is required.
                       </span>
-                      <span class="text-danger" *ngIf="_formContact.controls['name'].errors['pattern']">
+                      <span class="text-danger" *ngIf="formContact.controls['name'].errors['pattern']">
                         The field must be a minimum of 4 characters.
                       </span>
                     </div>
@@ -130,12 +127,12 @@
                   <div class="form-group">
                     <label>Lastname*</label>
                     <input class="form-control" type="text" id="lastname" name="lastname" formControlName="lastname">
-                    <div *ngIf="!_formContact.controls['lastname'].valid && _formContact.controls['lastname'].touched"
+                    <div *ngIf="!formContact.controls['lastname'].valid && formContact.controls['lastname'].touched"
                       class="mt-1">
-                      <span class="text-danger" *ngIf="_formContact.controls['lastname'].errors['required']">
+                      <span class="text-danger" *ngIf="formContact.controls['lastname'].errors['required']">
                         The field is required.
                       </span>
-                      <span class="text-danger" *ngIf="_formContact.controls['lastname'].errors['pattern']">
+                      <span class="text-danger" *ngIf="formContact.controls['lastname'].errors['pattern']">
                         The field must be a minimum of 4 characters.
                       </span>
                     </div>
@@ -146,12 +143,12 @@
                   <div class="form-group">
                     <label>Email*</label>
                     <input class="form-control" id="email" type="text" name="email" formControlName="email">
-                    <div *ngIf="!_formContact.controls['email'].valid && _formContact.controls['email'].touched"
+                    <div *ngIf="!formContact.controls['email'].valid && formContact.controls['email'].touched"
                       class="mt-1">
-                      <span class="text-danger" *ngIf="_formContact.controls['email'].errors['required']">
+                      <span class="text-danger" *ngIf="formContact.controls['email'].errors['required']">
                         The field is required.
                       </span>
-                      <span class="text-danger" *ngIf="_formContact.controls['email'].errors['pattern']">
+                      <span class="text-danger" *ngIf="formContact.controls['email'].errors['pattern']">
                         The email is invalid.
                       </span>
                     </div>
@@ -164,9 +161,9 @@
                     <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone"
                       formControlName="phone">
 
-                    <div *ngIf="!_formContact.controls['phone'].valid && _formContact.controls['phone'].touched"
+                    <div *ngIf="!formContact.controls['phone'].valid && formContact.controls['phone'].touched"
                       class="mt-1">
-                      <span class="text-danger" *ngIf="_formContact.controls['phone'].errors['pattern']">
+                      <span class="text-danger" *ngIf="formContact.controls['phone'].errors['pattern']">
                         Incorrect format.
                       </span>
                     </div>
@@ -206,7 +203,7 @@
                   <div class="form-group">
                     <label for="range">Range</label>
                     <input type="range" class="form-control-range" id="range" name="range" formControlName="range">
-                    <p>{{_formContact.controls['range'].value}}</p>
+                    <p>{{formContact.controls['range'].value}}</p>
                   </div>
                 </div>
 
@@ -230,9 +227,9 @@
                     </div>
 
 
-                    <div *ngIf="!_formContact.controls['radios'].valid && _formContact.controls['radios'].touched"
+                    <div *ngIf="!formContact.controls['radios'].valid && formContact.controls['radios'].touched"
                       class="mt-1">
-                      <span class="text-danger" *ngIf="_formContact.controls['radios'].errors['required']">
+                      <span class="text-danger" *ngIf="formContact.controls['radios'].errors['required']">
                         The field is required.
                       </span>
                     </div>
@@ -257,9 +254,9 @@
                     </div>
 
 
-                    <div *ngIf="!_formContact.controls['checkbox1'].valid && _formContact.controls['checkbox1'].touched"
+                    <div *ngIf="!formContact.controls['checkbox1'].valid && formContact.controls['checkbox1'].touched"
                       class="mt-1">
-                      <span class="text-danger" *ngIf="_formContact.controls['checkbox1'].errors['required']">
+                      <span class="text-danger" *ngIf="formContact.controls['checkbox1'].errors['required']">
                         The field is required.
                       </span>
                     </div>
@@ -276,7 +273,7 @@
 
             <button type="submit" id="btnSubmit"
               class="float-right btn btn-{{status == 'save' ? 'primary' : (status == 'edit' ? 'warning': '')}}"
-              [disabled]="!_formContact.valid">
+              [disabled]="!formContact.valid">
               {{status == 'save' ? 'Save' : (status == 'edit' ? 'Update': '')}}
             </button>
 
@@ -285,8 +282,5 @@
         </form>
       </div>
     </div>
-
   </div>
-
-
 </div>
