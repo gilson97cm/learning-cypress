@@ -14,7 +14,8 @@
         placeholder="Type to Search" 
         (input)="onSearch($event.target.value)"> -->
 
-      <button hidden id="btnDeleteMultiple" class="btn btn-sm btn-success" *ngIf="status == ''" (click)="showContact('')">
+      <button hidden id="btnDeleteMultiple" class="btn btn-sm btn-success" *ngIf="status == ''"
+        (click)="showContact('')">
         <i class="fa fa-plus" aria-hidden="true"></i> Delete Selected
       </button>
       <button id="btnAdd" class="btn btn-sm btn-success" *ngIf="status == ''" (click)="showContact('save')">
@@ -64,12 +65,16 @@
             </tbody>
           </table>
         </div>
-
-        <!-- <ul class="contactList">
-          <li *ngFor="let contact of contacts">{{contact.name}}</li>
-        </ul> -->
-
-
+        <div id="querying">
+          <h5>Querying</h5>
+          <ul class="list-group query-list" id="listFruts">
+            <li class="first"><input type="text" placeholder="Name" id="nameText"></li>
+            <li class="second" id="second">oranges</li>
+            <li class="third" id="third">bananas</li>
+            <li class="fourth" id="fourth">more apples</li>
+          </ul>
+        </div>
+        <div class="utility-blob"></div>
       </div>
 
       <div *ngIf="status == 'show'">
@@ -91,8 +96,8 @@
 
         <form [formGroup]="_formContact" (submit)="addOrEditContact()" id="form">
 
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
+          <ul class="nav nav-tabs" id="tabs"> 
+            <li class="nav-item active" id="tabChildren">
               <a class="nav-link active" data-toggle="tab" href="#tab1">Tab 1</a>
             </li>
             <li class="nav-item">
@@ -124,10 +129,8 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Lastname*</label>
-                    <input class="form-control" type="text" id="lastname" name="lastname"
-                      formControlName="lastname" >
-                    <div
-                      *ngIf="!_formContact.controls['lastname'].valid && _formContact.controls['lastname'].touched"
+                    <input class="form-control" type="text" id="lastname" name="lastname" formControlName="lastname">
+                    <div *ngIf="!_formContact.controls['lastname'].valid && _formContact.controls['lastname'].touched"
                       class="mt-1">
                       <span class="text-danger" *ngIf="_formContact.controls['lastname'].errors['required']">
                         The field is required.
@@ -202,8 +205,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="range">Range</label>
-                    <input type="range" class="form-control-range" 
-                    id="range" name="range" formControlName="range">
+                    <input type="range" class="form-control-range" id="range" name="range" formControlName="range">
                     <p>{{_formContact.controls['range'].value}}</p>
                   </div>
                 </div>
@@ -243,20 +245,19 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="form-check form-check">
-                      <input class="form-check-input" type="checkbox" id="checkbox1" name="checkbox1"
-                        value="option1" formControlName="checkbox1">
+                      <input class="form-check-input" type="checkbox" id="checkbox1" name="checkbox1" value="option1"
+                        formControlName="checkbox1">
                       <label class="form-check-label" for="checkbox1">Check 1</label>
                     </div>
 
                     <div class="form-check form-check">
-                      <input class="form-check-input" type="checkbox" id="checkbox2" name="checkbox2"
-                        value="option2" formControlName="checkbox1" disabled>
+                      <input class="form-check-input" type="checkbox" id="checkbox2" name="checkbox2" value="option2"
+                        formControlName="checkbox1" disabled>
                       <label class="form-check-label" for="checkbox2">Check 2</label>
                     </div>
 
 
-                    <div
-                      *ngIf="!_formContact.controls['checkbox1'].valid && _formContact.controls['checkbox1'].touched"
+                    <div *ngIf="!_formContact.controls['checkbox1'].valid && _formContact.controls['checkbox1'].touched"
                       class="mt-1">
                       <span class="text-danger" *ngIf="_formContact.controls['checkbox1'].errors['required']">
                         The field is required.
@@ -270,7 +271,8 @@
 
 
           <div class="form-group">
-            <button type="button" id="btnCancel" class="btn btn-danger float-right ml-1" (click)="showContact('')">Cancel</button>
+            <button type="button" id="btnCancel" class="btn btn-danger float-right ml-1"
+              (click)="showContact('')">Cancel</button>
 
             <button type="submit" id="btnSubmit"
               class="float-right btn btn-{{status == 'save' ? 'primary' : (status == 'edit' ? 'warning': '')}}"

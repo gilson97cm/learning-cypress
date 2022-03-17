@@ -1,12 +1,11 @@
 import { Json } from "@angular/core/src/facade/lang";
 import "cypress-file-upload";
 describe("My First Test", () => {
-  let ip = "192.168.0.113:80";
-  //let site = 'http://localhost:3000/'
+  let ip = "100.100.100.205:8080";
   let url = `http://${ip}/api/contacts`;
   let updateContactId = 18;
   let deleteContactId = 35;
-  let options = 0;
+  let options = 19;
 
   it("Successfully Loads", () => {
     cy.visit("/");
@@ -95,13 +94,13 @@ describe("My First Test", () => {
         .uncheck()
         .should("not.be.checked");
     });
-    
+
     it('Trigger', () => {
       cy.get('#range')
-      .invoke('val', 25)
-      .trigger('change')
-      .get('input[type=range]').siblings('p')
-      .should('have.text', '25')
+        .invoke('val', 25)
+        .trigger('change')
+        .get('input[type=range]').siblings('p')
+        .should('have.text', '25')
     });
 
     it("Select", () => {
@@ -116,13 +115,11 @@ describe("My First Test", () => {
       cy.get("table")
         .invoke("height")
         .then(x => {
-          if(x > 400){
+          if (x > 400) {
             cy.get(".my-custom-scrollbar").scrollTo("bottom");
           }
         });
     });
-
-    
 
     it("Screenshot", () => {
       //cy.wait(2000);
@@ -317,7 +314,7 @@ describe("My First Test", () => {
     it("Length items table", () => {
       cy.get(".contactList tr").then((x) => {
         cy.get(".contactList tr")
-          .should("have.length", x.length) // assertion
+          .should("have.length", x.length) 
           .and(($tr) => {
             expect($tr.get(0).textContent, "first item").to.contains(
               "Cypress Update"
@@ -402,7 +399,6 @@ describe("My First Test", () => {
     it('Navigation', () => {
       cy.reload()
       cy.wait(4000);
-      // reload the page without using the cache
       cy.reload(true)
     })
   }
@@ -411,30 +407,266 @@ describe("My First Test", () => {
     it('Network Request', () => {
       cy.intercept(
         {
-          method: 'GET', // Route all GET requests
-          url: url, // that have a URL that matches '/users/*'
+          method: 'GET',
+          url: url, 
         },
-        [] // and force the response to be: []
-      ).as('getContacts') // and assign an alias
+        []
+      ).as('getContacts') 
     })
   }
 
   if (options == 9) {
     it('Wait Request', () => {
-      cy.intercept('/activities/*', { fixture: 'activities' }).as('getActivities')
-      cy.intercept('/messages/*', { fixture: 'messages' }).as('getMessages')
-
-      // visit the dashboard, which should make requests that match
-      // the two routes above
-      cy.visit('http://localhost:8888/dashboard')
-
-      // pass an array of Route Aliases that forces Cypress to wait
-      // until it sees a response for each request that matches
-      // each of these aliases
-      cy.wait(['@getActivities', '@getMessages'])
-
-      // these commands will not run until the wait command resolves above
-      cy.get('h1').should('contain', 'Dashboard')
+      cy.intercept('/index.php?id_product=1&controller=product').as('getProduct')
+      cy.intercept('/index.php?id_product=6&controller=product').as('getCarShop')
+      cy.visit('http://automationpractice.com')
+      cy.wait(1000, ['@getProduct', '@getCarShop'])
+      cy.get('h4').should('contain', 'Newsletter')
     })
   }
+
+  if (options == 10) {
+    it('Flake & Assertions Example', () => {
+      cy.intercept('/api/contacts').as('getSearch')
+      cy.wait('@getSearch').its('request.url').should('include', 'http://100.100.100.205:8080/api/contacts')
+      cy.get('.contactList ').should('contain', 'User 1').and('contain', 'User 2')
+    })
+  }
+
+
+  if (options == 11) {
+    it('Querying', () => {
+      cy.get('.query-list')
+        .contains('bananas').should('have.class', 'third')
+      cy.get('.query-list').contains(/^b\w+/).should('have.class', 'third')
+      cy.get('#querying')
+        .contains('ul', 'oranges')
+        .should('have.class', 'query-list')
+    })
+
+    it('Within - Root', () => {
+      cy.get('.query-list').within(() => {
+        cy.get('#nameText').should('have.attr', 'placeholder', 'Name')
+      })
+      cy.root().should('match', 'html')
+
+      cy.get('.query-list').within(() => {
+        cy.root().should('have.class', 'query-list')
+      })
+    })
+  }
+
+  if (options == 12) {
+    it("Click", () => {
+      cy.get('.contactList td').first().should('contain', '1');
+      cy.get('.contactList td').last().should('contain', 'Delete')
+      cy.get('.query-list')
+        .contains('oranges').next().should('contain', 'bananas')
+      cy.get('.query-list')
+        .contains('oranges')
+        .nextAll().should('have.length', 2)
+      cy.get('#second')
+        .nextUntil('#fourth').should('contain', 'bananas')
+      cy.get('#listFruts').find('.third')
+        .prevAll().should('have.length', 2)
+      cy.get('#listFruts').find('#fourth')
+        .prevUntil('#second').should('have.length', 1)
+      cy.get("#btnAdd").click();
+    });
+
+    it('Traversal', () => {
+      cy.get('#tabs')
+        .children('#tabChildren')
+        .should('contain', 'Tab 1')
+      cy.get('#tabs')
+        .closest('ul')
+        .should('have.class', 'nav')
+      cy.get('#tabs>li')
+        .eq(1).should('contain', 'Tab 2')
+      cy.get('#tabs>li')
+        .filter('.active').should('contain', 'Tab 1')
+      cy.get('#tabs').find('li').find('a').should('contain', 'Tab 1')
+      cy.get('.form-group .btn')
+        .not('[disabled]').should('not.contain', 'Disabled')
+      cy.get('#tabs').find('li').not('.active')
+        .prev().should('contain', 'Tab 1')
+      cy.get('#tabs>li')
+        .filter('.active').siblings().should('have.length', 1)
+    })
+  }
+
+  if (options == 13) {
+    it('Utilities', () => {
+      cy.request('http://100.100.100.205:8080/api/contacts')
+        .then((response) => {
+          let ids = Cypress._.chain(response.body.contacts).map('id').take(3).value()
+          expect(ids).to.deep.eq([1, 2, 3])
+        })
+
+      cy.get('.utility-blob').then(($div) => {
+
+        Cypress.Blob.imgSrcToDataURL('https://example.cypress.io/assets/img/javascript-logo.png', undefined, 'anonymous')
+          .then((dataUrl) => {
+            let img = Cypress.$('', { src: dataUrl })
+            $div.append(img)
+            cy.get('.utility-blob img').click()
+              .should('have.attr', 'src', dataUrl)
+          })
+      })
+
+      let waited = false
+
+      function waitOneSecond() {
+        return new Cypress.Promise((resolve, reject) => {
+          setTimeout(() => {
+            waited = true
+            resolve('foo')
+          }, 1000)
+        })
+      }
+
+      cy.then(() => {
+        waitOneSecond().then((str) => {
+          expect(str).to.eq('foo')
+          expect(waited).to.be.true
+        })
+      })
+    })
+  }
+
+  if (options == 14) {
+    describe('Nav Menus', () => {
+      context('iphone-5 resolution', () => {
+        it('displays mobile menu on click', () => {
+          cy.get('#navbarSupportedContent').should('be.visible')
+          cy.viewport('iphone-5')
+          cy.get('#btnShowOptions').click()
+          cy.get('.navbar-nav > li').should('contain', 'About')
+
+        })
+      })
+    })
+  }
+
+  if (options == 15) {
+    it('Cypress Window', () => {
+      cy.visit('http://localhost:3000')
+      cy.window().then((win) => {
+        console.log(win)
+      })
+      cy.window().should('have.property', 'innerHeight', 660)
+    })
+
+    it('Window Events', (done) => {
+
+      cy.window().then((win) => {
+        cy.get('#btnAdd').click()
+        cy.get('#lastname').then((jQueryElement) => {
+          console.log(jQueryElement)
+          let elemHtml = jQueryElement.get(0)
+          elemHtml.addEventListener('keydown', (event) => {
+            expect(event instanceof win['KeyboardEvent']).to.be.true
+            done()
+          })
+        })
+      })
+      cy.get('#lastname').type('A')
+    })
+
+  }
+
+  if (options == 16) {
+    it('Stub Cypress', () => {
+      const greeter = {
+        /**
+          * Greets a person
+          * @param {string} name
+        */
+        greet(name) {
+          return `Hello, ${name}!`
+        },
+      }
+      cy.stub(greeter, 'greet')
+        .callThrough()
+        .withArgs(Cypress.sinon.match.string).returns('Hi')
+        .withArgs(Cypress.sinon.match.number).throws(new Error('Invalid name'))
+
+      expect(greeter.greet('World')).to.equal('Hi')
+      expect(() => greeter.greet(42)).to.throw('Invalid name')
+      expect(greeter.greet).to.have.been.calledTwice
+      expect(greeter.greet()).to.equal('Hello, undefined!')
+    })
+    it('Spy Cypress', () => {
+      const obj = {
+        foo() { },
+      }
+      const spy = cy.spy(obj, 'foo').as('anyArgs')
+      const withFoo = spy.withArgs('foo').as('withFoo')
+
+      obj.foo()
+      expect(spy).to.be.called
+    })
+    it('Clock Cypress', () => {
+      cy.get('#btnAdd').click()
+      cy.clock()
+      cy.get('#name').type('Jane')
+      cy.get('#lastname').type('Lane')
+
+      cy.clock().then((clock) => {
+        clock.tick(1000)
+      })
+      cy.clock().invoke('restore')
+    })
+  }
+
+  if (options == 17) {
+    it('Misc', () => {
+      cy.get('.contactList').within(() => {
+        cy.contains('User 1').click().end()
+        cy.contains('User 2').click()
+      })
+
+      if (Cypress.platform === 'win32') {
+        cy.exec('print cypress.json').its('stderr').should('be.empty')
+      } else {
+        cy.exec('cat cypress.json').its('stderr').should('be.empty')
+      }
+
+      cy.get('#btnAdd').click()
+      cy.get('#form').find('#name').click()
+      cy.focused().should('have.id', 'name')
+
+      cy.get('#form').find('#lastname').click()
+      cy.focused().should('have.id', 'lastname')
+      cy.screenshot('my-image')
+      cy.wrap({ foo: 'bar' })
+        .should('have.property', 'foo')
+        .and('include', 'bar')
+
+      cy.exec('npm run lite')
+        .its('stdout')
+        .should('contain', 'Done running the script')
+
+      cy.exec('npm run lite').then((result) => {
+        console.log('Succesfully')
+
+      })
+    })
+  }
+
+  if (options == 18) {
+    it('Cypress Platform', () => {
+      Cypress.platform.should('Ccontain', 'win32')
+    })
+  }
+
+  if (options == 19) {
+    it('Cypress Env', () => {
+      expect(Cypress.env('contacts_url')).to.eq('/api/contacts')
+      expect(Cypress.env('server_url')).to.eq('http://localhost:3000/')
+      expect(Cypress.env()).to.have.property('contacts_url', '/api/contacts')
+      expect(Cypress.env()).to.have.property('server_url', 'http://localhost:3000/')
+    })
+  }
+
 });
