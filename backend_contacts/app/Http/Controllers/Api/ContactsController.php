@@ -40,7 +40,7 @@ class ContactsController extends Controller
             DB::beginTransaction();
             $user = new User([
                 'name'=> $request->name,
-                'lastname'=> $request->lastname,
+                'lastName'=> $request->lastName,
                 'email'=> $request->email,
                 'phone'=> $request->phone,
                 'gender'=> $request->gender,
@@ -88,8 +88,11 @@ class ContactsController extends Controller
                 'contact' => [
                     'id' => $user->id,
                     'name' => $user->name,
-                    'lastname' => $user->lastname,
-                    'email' => $user->email
+                    'lastName' => $user->lastName,
+                    'email' => $user->email,
+                    'date' => $user->date,
+                    'phone' => $user->phone,
+                    'gender' => $user->gender,
                 ]
             ], 200);
         }
@@ -100,8 +103,12 @@ class ContactsController extends Controller
             'contact' => [
                 'id' => $user->id,
                 'name' => $user->name,
-                'lastname' => $user->lastname,
-                'email' => $user->email
+                'lastName' => $user->lastName,
+                'email' => $user->email,
+                'date' => $user->date,
+                'phone' => $user->phone,
+                'gender' => $user->gender,
+
             ]
         ], 404);
     }
@@ -139,7 +146,7 @@ class ContactsController extends Controller
             $user = User::find($id);
             DB::beginTransaction();
             $user->name = $request->name;
-            $user->lastname = $request->lastname;
+            $user->lastName = $request->lastName;
             $user->email = $request->email;
             $user->phone = $request->phone;
             $user->gender = $request->gender;

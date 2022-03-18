@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EmployeeService {
 
-    URL:string  = 'http://192.168.0.113/api/contacts';
+    URL:string  = 'http://100.100.100.207:8080/api/contacts';
 
     headers = new Headers({'Content-Type': 'application/json' });
     options = new RequestOptions({headers:this.headers});

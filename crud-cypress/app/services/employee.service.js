@@ -16,7 +16,7 @@ require('rxjs/add/operator/map');
 var EmployeeService = (function () {
     function EmployeeService(http) {
         this.http = http;
-        this.URL = 'http://192.168.0.113/api/contacts';
+        this.URL = 'http://100.100.100.207:8080/api/contacts';
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.options = new http_1.RequestOptions({ headers: this.headers });
     }

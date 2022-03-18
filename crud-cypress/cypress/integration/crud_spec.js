@@ -1,7 +1,7 @@
 import { Json } from "@angular/core/src/facade/lang";
 import "cypress-file-upload";
 describe("My First Test", () => {
-  let ip = "100.100.100.205:8080";
+  let ip = "100.100.100.207:8080";
   let url = `http://${ip}/api/contacts`;
   let updateContactId = 18;
   let deleteContactId = 35;

@@ -16,9 +16,11 @@ class DatabaseSeeder extends Seeder
         for ($i = 1; $i<=25; $i++){
             \App\User::create([
                 'name' => $faker->firstname,
-                'lastname' => $faker->lastname,
+                'lastName' => $faker->lastname,
                 'phone' => rand(1000000000,9999999999),
                 'email' => $faker->email,
+                'username' => $faker->username,
+                'password' => 'root',
                 'gender' => $i%2==0 ? 'Masculino' : 'Femenino',
                 'date' => now()->format('Y-m-d')
             ]);
